@@ -1,2 +1,3 @@
-# CProtocolBuffer
-Learning Protocol Buffers using C/C++.
+## Description
+
+> - Learning gRPC with Protobuf and C/C++.
