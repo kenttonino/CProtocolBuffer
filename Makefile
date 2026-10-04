@@ -19,9 +19,11 @@ LDLIBS += -Wl,--start-group $(wildcard /opt/grpc/lib/lib*.a) -Wl,--end-group -lp
 
 .PHONY: build run-server
 
-build:
-	${CXX} ${CXXFLAGS} ./route_server/server.cpp ${SOURCE_FILES} -o ./build/route_server.out ${LDFLAGS} ${LDLIBS}
+build-server:
+	${CXX} ${CXXFLAGS} ./src_server/server.cpp ${SOURCE_FILES} -o ./build/src_server.out ${LDFLAGS} ${LDLIBS}
+
+build: build-server
 
 run-server: build
 	clear
-	./build/route_server.out
+	./build/src_server.out
