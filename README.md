@@ -33,6 +33,7 @@ cmake -DCMAKE_CXX_STANDARD=17 ../..
 make
 
 # (6) Then install it to your prefer directory.
+sudo mkdir /opt/grpc
 cmake --install . --prefix /opt/grpc
 
 # (7) Export the gRPC headers in your bashrc.
