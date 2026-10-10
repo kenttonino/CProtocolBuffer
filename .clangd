@@ -1,4 +1,5 @@
 CompileFlags:
   Add:
     - "-I/opt/grpc/include"
+    - "-I/home/kenttonino/Documents/projects/CgRPC/utils_protos/gen"
     - "--std=c++17"

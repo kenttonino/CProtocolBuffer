@@ -1,9 +1,9 @@
 CXX = g++
 # Use c++17.
 # Include the grpc headers.
-CXXFLAGS += -std=c++17 -I/opt/grpc/include
+CXXFLAGS += -std=c++17 -I/opt/grpc/include -I/home/kenttonino/Documents/projects/CgRPC/utils_protos/gen
 # Source files
-SOURCE_FILES = $(wildcard ./utils/*.cpp)
+SOURCE_FILES = $(wildcard ./utils_database/*.cpp) $(wildcard ./utils_protos/gen/*.cc)
 # LD = Link the dependencies.
 LDFLAGS += -L/opt/grpc/lib
 
@@ -17,12 +17,19 @@ LDFLAGS += -L/opt/grpc/lib
 # .so = Shared (dynamic library) means code stays in a separate file (The binary just references it at runtime).
 LDLIBS += -Wl,--start-group $(wildcard /opt/grpc/lib/lib*.a) -Wl,--end-group -lpthread -ldl -lz
 
-.PHONY: build run-server
+# Define the headers necessary for protobuf usage in C++.
+PROTOC = protoc
+PROTOS_PATH = ./utils_protos
+
+.PHONY: build-protoc build-server build run-server
+
+build-protoc:
+	${PROTOC} -I $(PROTOS_PATH) --cpp_out=${PROTOS_PATH}/gen utils_protos/route.proto
 
 build-server:
 	${CXX} ${CXXFLAGS} ./src_server/main.cpp ${SOURCE_FILES} -o ./build/src_server.out ${LDFLAGS} ${LDLIBS}
 
-build: build-server
+build: build-protoc build-server
 
 run-server: build
 	clear
