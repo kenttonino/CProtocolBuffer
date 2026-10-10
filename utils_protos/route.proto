@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+// Points are represented as latitude-longitude pairs in the E7 representation.
+// Degrees multiplied by 10^7 and rounded to the nearest integer.
+// Latitudes should be in the range +/- 90 degress/.
+// Longitude should be in the range +/- 180 degress (inclusive).
+message Point {
+  int32 latitude = 1;
+  int32 longitude = 2;
+}
+
+// A feature names something at a given point.
+// If a feature could not be named, the name is empty.
+message Feature {
+  string name = 1;
+  Point location = 2;
+}
+
+// A latitude-longitude rectangle, represented as two diagonally opposite points "lo" and "hi".
+message Rectangle {
+  Point lo = 1;
+  Point h1 = 2;
+}
+
+// A message sent while at a given point.
+message RouteNote {
+  Point location = 1;
+  string message = 2;
+}
+
+// Received in response to a RecordRoute RPC.
+// It contains the number of individual points received, the number of detected features, and
+// the total distance covered as the cumulative sum of the distance between each point.
+message RouteSummary {
+  int32 point_count = 1;
+  int32 feature_count = 2;
+  int32 distance = 3;
+  int32 elapsed_tile -4;
+}
+
+// Server exported interface.
+service Route {
+  // Simple RPC.
+  // Obtains the feature at a given position.
+  // A feature with an empty name is returned if there's no feature at the given position.
+  rpc GetFeature(Point) returns (Feature) {}
+
+  // A server-to-client streaming RPC.
+  rpc ListFeatures(Rectangle) returns (stream Feature) {}
+
+  // A client-to-server streaming RPC.
+  // Accepts a stream of Points on a route being traversed, returning a RouteSummary when traversal is completed.
+  rpc RecordRoute(stream Point) returns (RouteSummary) {}
+
+  // A bidirectional streaming RPC.
+  // Accepts a stream of RouteNotes sent while a route is being traversed. while receiving other RouteNotes.
+  rpc RouteChat(stream RouteNote) returns (stream RouteNote) {}
+}
