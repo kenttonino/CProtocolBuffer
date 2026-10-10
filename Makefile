@@ -3,7 +3,7 @@ CXX = g++
 # Include the grpc headers.
 CXXFLAGS += -std=c++17 -I/opt/grpc/include
 # Source files
-SOURCE_FILES = $(wildcard ./utils/*.cpp)
+SOURCE_FILES = $(wildcard ./utils_database/*.cpp)
 # LD = Link the dependencies.
 LDFLAGS += -L/opt/grpc/lib
 
