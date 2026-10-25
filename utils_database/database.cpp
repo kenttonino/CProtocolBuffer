@@ -5,7 +5,6 @@
 #include <regex>
 #include "absl/flags/flag.h"
 #include "absl/log/log.h"
-#include "./utils_database.hpp"
 #include "../utils_protos/gen/route.pb.h"
 
 ABSL_FLAG(std::string, db_path, "./utils_database/database.json", "Path to database file.");
@@ -25,26 +24,85 @@ namespace utils_database {
   }
 
   class Parser {
-    bool failed_ = false;
-    std::string database_;
-    size_t current_ = 0;
+    bool _failed = false;
+    std::string _database;
+    size_t _current = 0;
+    const std::string _location = "\"location\":";
+    const std::string _latitude = "\"latitude\":";
+    const std::string _longitude = "\"longitude\":";
+    const std::string _name = "\"name\":";
 
     public:
-      explicit Parser(const std::string& database) : database_(database) {
+      explicit Parser(const std::string& database) : _database(database) {
         if (!Match("[")) {
           SetFailedAndReturnFalse();
         }
       }
 
+      bool Finished() {
+        return _current >= _database.size();
+      }
+
+      bool TryParseOne(route::Feature* feature) {
+        if (_failed || Finished() || !Match("{")) {
+          return SetFailedAndReturnFalse();
+        }
+
+        if (!Match(_location) || !Match("(") || !Match(_latitude)) {
+          return SetFailedAndReturnFalse();
+        }
+
+        long temp = 0;
+        ReadLong(&temp);
+        feature -> mutable_location() -> set_latitude(temp);
+        if (!Match(",") || !Match(_longitude)) {
+          return SetFailedAndReturnFalse();
+        }
+
+        ReadLong(&temp);
+        feature -> mutable_location() -> set_longitude(temp);
+        if (!Match("},") || !Match(_name) || !Match("\"")) {
+          return SetFailedAndReturnFalse();
+        }
+
+        size_t name_start = _current;
+        while(_current != _database.size() && _database[_current++] != '"') {}
+
+        if (_current == _database.size()) {
+          return SetFailedAndReturnFalse();
+        }
+
+        feature -> set_name(_database.substr(name_start, _current - name_start - 1));
+        if (!Match("},")) {
+          if (_database[_current - 1] == ']' && _current == _database.size()) {
+            return true;
+          }
+
+          return SetFailedAndReturnFalse();
+        }
+
+        return true;
+      }
+
     private:
       bool SetFailedAndReturnFalse() {
-        failed_ = true;
+        _failed = true;
         return false;
       }
+
       bool Match(const std::string& prefix) {
-        bool equal = database_.substr(current_, prefix.size()) == prefix;
-        current_ += prefix.size();
+        bool equal = _database.substr(_current, prefix.size()) == prefix;
+        _current += prefix.size();
         return equal;
+      }
+
+      void ReadLong(long* l) {
+        size_t start = _current;
+        while (_current != _database.size() && _database[_current] != ',' && _database[_current] != '}') {
+          _current++;
+        }
+
+        *l = std::stol(_database.substr(start, _current - start));
       }
   };
 
@@ -53,8 +111,21 @@ namespace utils_database {
     return std::regex_replace(json, whitespace_outside_quotes, "");
   }
 
-  void ParseDatabase(const std::string& database, std::vector<Feature>* feature_list) {
+  void ParseDatabase(const std::string& database, std::vector<route::Feature>* feature_list) {
     feature_list -> clear();
     std::string database_content(MinifyJson(database));
+
+    Parser parser(database_content);
+    route::Feature feature;
+    while (!parser.Finished()) {
+      feature_list -> push_back(route::Feature());
+      if (!parser.TryParseOne(&feature_list -> back())) {
+        LOG(ERROR) << "Error parsing the database file";
+        feature_list -> clear();
+        break;
+      }
+    }
+
+    LOG(INFO) << "Database parsed, loaeded " << feature_list -> size() << " features.";
   }
 }
