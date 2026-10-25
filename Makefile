@@ -1,9 +1,11 @@
 CXX = g++
+# Warning flags to suppress.
+WARNING_FLAGS = -Wno-deprecated-declarations
 # Use c++17.
 # Include the grpc headers.
-CXXFLAGS += -std=c++17 -I/opt/grpc/include -I/home/kenttonino/Documents/projects/CgRPC/utils_protos/gen
+CXXFLAGS += -std=c++17 -I/opt/grpc/include -I/home/kenttonino/Documents/projects/CgRPC/utils_protos/gen ${WARNING_FLAGS}
 # Source files
-SOURCE_FILES = $(wildcard ./utils_database/*.cpp) $(wildcard ./utils_protos/gen/*.cc)
+SOURCE_FILES = $(wildcard ./utils_database/*.cpp) $(wildcard ./utils_protos/gen/*.cc) $(wildcard ./src_server/server/server.cpp)
 # LD = Link the dependencies.
 LDFLAGS += -L/opt/grpc/lib
 
@@ -23,8 +25,8 @@ PROTOS_PATH = ./utils_protos
 
 .PHONY: build-protoc build-server build run-server
 
-build-protoc:
-	${PROTOC} -I $(PROTOS_PATH) --cpp_out=${PROTOS_PATH}/gen utils_protos/route.proto
+build-proto:
+	${PROTOC} -I $(PROTOS_PATH) --cpp_out=${PROTOS_PATH}/gen --grpc_out=${PROTOS_PATH}/gen --plugin=protoc-gen-grpc=/opt/grpc/bin/grpc_cpp_plugin utils_protos/route.proto
 
 build-server:
 	${CXX} ${CXXFLAGS} ./src_server/main.cpp ${SOURCE_FILES} -o ./build/src_server.out ${LDFLAGS} ${LDLIBS}
