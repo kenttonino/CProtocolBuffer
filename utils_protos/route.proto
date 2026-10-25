@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package route;
+
 // Points are represented as latitude-longitude pairs in the E7 representation.
 // Degrees multiplied by 10^7 and rounded to the nearest integer.
 // Latitudes should be in the range +/- 90 degress/.

@@ -53,6 +53,7 @@ struct TableStruct_route_2eproto {
 extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_route_2eproto;
 }  // extern "C"
+namespace route {
 class Feature;
 struct FeatureGlobalsTypeInternal;
 #ifndef PROTOBUF_MESSAGE_GLOBALS
@@ -93,11 +94,13 @@ extern const ::google::protobuf::internal::ClassDataFull RouteSummary_class_data
 #else
 extern const RouteSummaryGlobalsTypeInternal RouteSummary_globals_;
 #endif  // PROTOBUF_MESSAGE_GLOBALS
+}  // namespace route
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace route {
 
 // ===================================================================
 
@@ -105,7 +108,7 @@ namespace protobuf {
 // -------------------------------------------------------------------
 
 class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:RouteSummary) */ {
+/* @@protoc_insertion_point(class_definition:route.RouteSummary) */ {
  public:
   inline RouteSummary() : RouteSummary(nullptr) {}
   ~RouteSummary() PROTOBUF_FINAL;
@@ -227,7 +230,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "RouteSummary"; }
+  static ::absl::string_view FullMessageName() { return "route.RouteSummary"; }
 
   explicit RouteSummary(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   RouteSummary(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const RouteSummary& from);
@@ -297,7 +300,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
   void _internal_set_elapsed_tile(::int32_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:RouteSummary)
+  // @@protoc_insertion_point(class_scope:route.RouteSummary)
  private:
   class _Internal;
   using ParseTableT_ =
@@ -342,7 +345,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
 // -------------------------------------------------------------------
 
 class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Point final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:Point) */ {
+/* @@protoc_insertion_point(class_definition:route.Point) */ {
  public:
   inline Point() : Point(nullptr) {}
   ~Point() PROTOBUF_FINAL;
@@ -464,7 +467,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Point final : public ::google::prot
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "Point"; }
+  static ::absl::string_view FullMessageName() { return "route.Point"; }
 
   explicit Point(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   Point(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Point& from);
@@ -512,7 +515,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Point final : public ::google::prot
   void _internal_set_longitude(::int32_t value);
 
   public:
-  // @@protoc_insertion_point(class_scope:Point)
+  // @@protoc_insertion_point(class_scope:route.Point)
  private:
   class _Internal;
   using ParseTableT_ =
@@ -555,7 +558,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Point final : public ::google::prot
 // -------------------------------------------------------------------
 
 class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteNote final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:RouteNote) */ {
+/* @@protoc_insertion_point(class_definition:route.RouteNote) */ {
  public:
   inline RouteNote() : RouteNote(nullptr) {}
   ~RouteNote() PROTOBUF_FINAL;
@@ -677,7 +680,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteNote final : public ::google::
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "RouteNote"; }
+  static ::absl::string_view FullMessageName() { return "route.RouteNote"; }
 
   explicit RouteNote(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   RouteNote(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const RouteNote& from);
@@ -720,28 +723,28 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteNote final : public ::google::
   ::std::string* PROTOBUF_NONNULL _internal_mutable_message();
 
   public:
-  // .Point location = 1;
+  // .route.Point location = 1;
   [[nodiscard]] bool has_location()
       const;
   void clear_location() ;
-  [[nodiscard]] const ::Point& location() const;
-  [[nodiscard]] ::Point* PROTOBUF_NULLABLE release_location();
-  ::Point* PROTOBUF_NONNULL mutable_location();
-  void set_allocated_location(::Point* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_location(::Point* PROTOBUF_NULLABLE value);
-  ::Point* PROTOBUF_NULLABLE unsafe_arena_release_location();
+  [[nodiscard]] const ::route::Point& location() const;
+  [[nodiscard]] ::route::Point* PROTOBUF_NULLABLE release_location();
+  ::route::Point* PROTOBUF_NONNULL mutable_location();
+  void set_allocated_location(::route::Point* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_location(::route::Point* PROTOBUF_NULLABLE value);
+  ::route::Point* PROTOBUF_NULLABLE unsafe_arena_release_location();
 
   private:
-  const ::Point& _internal_location() const;
-  ::Point* PROTOBUF_NONNULL _internal_mutable_location();
+  const ::route::Point& _internal_location() const;
+  ::route::Point* PROTOBUF_NONNULL _internal_mutable_location();
 
   public:
-  // @@protoc_insertion_point(class_scope:RouteNote)
+  // @@protoc_insertion_point(class_scope:route.RouteNote)
  private:
   class _Internal;
   using ParseTableT_ =
       ::google::protobuf::internal::TcParseTable<1, 2,
-                          1, 25,
+                          1, 31,
                           2>;
   static constexpr ParseTableT_ InternalGenerateParseTable_(
       const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL class_data);
@@ -770,7 +773,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteNote final : public ::google::
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr message_;
-    ::Point* PROTOBUF_NULLABLE location_;
+    ::route::Point* PROTOBUF_NULLABLE location_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -779,7 +782,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteNote final : public ::google::
 // -------------------------------------------------------------------
 
 class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:Rectangle) */ {
+/* @@protoc_insertion_point(class_definition:route.Rectangle) */ {
  public:
   inline Rectangle() : Rectangle(nullptr) {}
   ~Rectangle() PROTOBUF_FINAL;
@@ -901,7 +904,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "Rectangle"; }
+  static ::absl::string_view FullMessageName() { return "route.Rectangle"; }
 
   explicit Rectangle(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   Rectangle(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Rectangle& from);
@@ -929,39 +932,39 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::
     kLoFieldNumber = 1,
     kH1FieldNumber = 2,
   };
-  // .Point lo = 1;
+  // .route.Point lo = 1;
   [[nodiscard]] bool has_lo()
       const;
   void clear_lo() ;
-  [[nodiscard]] const ::Point& lo() const;
-  [[nodiscard]] ::Point* PROTOBUF_NULLABLE release_lo();
-  ::Point* PROTOBUF_NONNULL mutable_lo();
-  void set_allocated_lo(::Point* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_lo(::Point* PROTOBUF_NULLABLE value);
-  ::Point* PROTOBUF_NULLABLE unsafe_arena_release_lo();
+  [[nodiscard]] const ::route::Point& lo() const;
+  [[nodiscard]] ::route::Point* PROTOBUF_NULLABLE release_lo();
+  ::route::Point* PROTOBUF_NONNULL mutable_lo();
+  void set_allocated_lo(::route::Point* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_lo(::route::Point* PROTOBUF_NULLABLE value);
+  ::route::Point* PROTOBUF_NULLABLE unsafe_arena_release_lo();
 
   private:
-  const ::Point& _internal_lo() const;
-  ::Point* PROTOBUF_NONNULL _internal_mutable_lo();
+  const ::route::Point& _internal_lo() const;
+  ::route::Point* PROTOBUF_NONNULL _internal_mutable_lo();
 
   public:
-  // .Point h1 = 2;
+  // .route.Point h1 = 2;
   [[nodiscard]] bool has_h1()
       const;
   void clear_h1() ;
-  [[nodiscard]] const ::Point& h1() const;
-  [[nodiscard]] ::Point* PROTOBUF_NULLABLE release_h1();
-  ::Point* PROTOBUF_NONNULL mutable_h1();
-  void set_allocated_h1(::Point* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_h1(::Point* PROTOBUF_NULLABLE value);
-  ::Point* PROTOBUF_NULLABLE unsafe_arena_release_h1();
+  [[nodiscard]] const ::route::Point& h1() const;
+  [[nodiscard]] ::route::Point* PROTOBUF_NULLABLE release_h1();
+  ::route::Point* PROTOBUF_NONNULL mutable_h1();
+  void set_allocated_h1(::route::Point* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_h1(::route::Point* PROTOBUF_NULLABLE value);
+  ::route::Point* PROTOBUF_NULLABLE unsafe_arena_release_h1();
 
   private:
-  const ::Point& _internal_h1() const;
-  ::Point* PROTOBUF_NONNULL _internal_mutable_h1();
+  const ::route::Point& _internal_h1() const;
+  ::route::Point* PROTOBUF_NONNULL _internal_mutable_h1();
 
   public:
-  // @@protoc_insertion_point(class_scope:Rectangle)
+  // @@protoc_insertion_point(class_scope:route.Rectangle)
  private:
   class _Internal;
   using ParseTableT_ =
@@ -994,8 +997,8 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::
         const Rectangle& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::Point* PROTOBUF_NULLABLE lo_;
-    ::Point* PROTOBUF_NULLABLE h1_;
+    ::route::Point* PROTOBUF_NULLABLE lo_;
+    ::route::Point* PROTOBUF_NULLABLE h1_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1004,7 +1007,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::
 // -------------------------------------------------------------------
 
 class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Feature final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:Feature) */ {
+/* @@protoc_insertion_point(class_definition:route.Feature) */ {
  public:
   inline Feature() : Feature(nullptr) {}
   ~Feature() PROTOBUF_FINAL;
@@ -1126,7 +1129,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Feature final : public ::google::pr
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "Feature"; }
+  static ::absl::string_view FullMessageName() { return "route.Feature"; }
 
   explicit Feature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   Feature(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Feature& from);
@@ -1169,28 +1172,28 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Feature final : public ::google::pr
   ::std::string* PROTOBUF_NONNULL _internal_mutable_name();
 
   public:
-  // .Point location = 2;
+  // .route.Point location = 2;
   [[nodiscard]] bool has_location()
       const;
   void clear_location() ;
-  [[nodiscard]] const ::Point& location() const;
-  [[nodiscard]] ::Point* PROTOBUF_NULLABLE release_location();
-  ::Point* PROTOBUF_NONNULL mutable_location();
-  void set_allocated_location(::Point* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_location(::Point* PROTOBUF_NULLABLE value);
-  ::Point* PROTOBUF_NULLABLE unsafe_arena_release_location();
+  [[nodiscard]] const ::route::Point& location() const;
+  [[nodiscard]] ::route::Point* PROTOBUF_NULLABLE release_location();
+  ::route::Point* PROTOBUF_NONNULL mutable_location();
+  void set_allocated_location(::route::Point* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_location(::route::Point* PROTOBUF_NULLABLE value);
+  ::route::Point* PROTOBUF_NULLABLE unsafe_arena_release_location();
 
   private:
-  const ::Point& _internal_location() const;
-  ::Point* PROTOBUF_NONNULL _internal_mutable_location();
+  const ::route::Point& _internal_location() const;
+  ::route::Point* PROTOBUF_NONNULL _internal_mutable_location();
 
   public:
-  // @@protoc_insertion_point(class_scope:Feature)
+  // @@protoc_insertion_point(class_scope:route.Feature)
  private:
   class _Internal;
   using ParseTableT_ =
       ::google::protobuf::internal::TcParseTable<1, 2,
-                          1, 20,
+                          1, 26,
                           2>;
   static constexpr ParseTableT_ InternalGenerateParseTable_(
       const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL class_data);
@@ -1219,7 +1222,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Feature final : public ::google::pr
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr name_;
-    ::Point* PROTOBUF_NULLABLE location_;
+    ::route::Point* PROTOBUF_NULLABLE location_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1249,13 +1252,13 @@ inline void Point::clear_latitude() {
   ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
 }
 inline ::int32_t Point::latitude() const {
-  // @@protoc_insertion_point(field_get:Point.latitude)
+  // @@protoc_insertion_point(field_get:route.Point.latitude)
   return _internal_latitude();
 }
 inline void Point::set_latitude(::int32_t value) {
   _internal_set_latitude(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  // @@protoc_insertion_point(field_set:Point.latitude)
+  // @@protoc_insertion_point(field_set:route.Point.latitude)
 }
 inline ::int32_t Point::_internal_latitude() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1273,13 +1276,13 @@ inline void Point::clear_longitude() {
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
 }
 inline ::int32_t Point::longitude() const {
-  // @@protoc_insertion_point(field_get:Point.longitude)
+  // @@protoc_insertion_point(field_get:route.Point.longitude)
   return _internal_longitude();
 }
 inline void Point::set_longitude(::int32_t value) {
   _internal_set_longitude(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000002U);
-  // @@protoc_insertion_point(field_set:Point.longitude)
+  // @@protoc_insertion_point(field_set:route.Point.longitude)
 }
 inline ::int32_t Point::_internal_longitude() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1302,7 +1305,7 @@ inline void Feature::clear_name() {
 }
 inline const ::std::string& Feature::name() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Feature.name)
+  // @@protoc_insertion_point(field_get:route.Feature.name)
   return _internal_name();
 }
 template <typename Arg_, typename... Args_>
@@ -1310,13 +1313,13 @@ PROTOBUF_ALWAYS_INLINE void Feature::set_name(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   _impl_.name_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:Feature.name)
+  // @@protoc_insertion_point(field_set:route.Feature.name)
 }
 inline ::std::string* PROTOBUF_NONNULL Feature::mutable_name()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   ::std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:Feature.name)
+  // @@protoc_insertion_point(field_mutable:route.Feature.name)
   return _s;
 }
 inline const ::std::string& Feature::_internal_name() const {
@@ -1333,7 +1336,7 @@ inline ::std::string* PROTOBUF_NONNULL Feature::_internal_mutable_name() {
 }
 inline ::std::string* PROTOBUF_NULLABLE Feature::release_name() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:Feature.name)
+  // @@protoc_insertion_point(field_release:route.Feature.name)
   if (!CheckHasBit(_impl_._has_bits_[0], 0x00000001U)) {
     return nullptr;
   }
@@ -1355,10 +1358,10 @@ inline void Feature::set_allocated_name(::std::string* PROTOBUF_NULLABLE value) 
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.name_.IsDefault()) {
     _impl_.name_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:Feature.name)
+  // @@protoc_insertion_point(field_set_allocated:route.Feature.name)
 }
 
-// .Point location = 2;
+// .route.Point location = 2;
 inline bool Feature::has_location() const {
   bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000002U);
   PROTOBUF_ASSUME(!value || _impl_.location_ != nullptr);
@@ -1369,34 +1372,34 @@ inline void Feature::clear_location() {
   if (_impl_.location_ != nullptr) _impl_.location_->Clear();
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
 }
-inline const ::Point& Feature::_internal_location() const {
+inline const ::route::Point& Feature::_internal_location() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::Point* p = _impl_.location_;
-  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::Point>(&::Point_globals_);
+  const ::route::Point* p = _impl_.location_;
+  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::route::Point>(&::route::Point_globals_);
 }
-inline const ::Point& Feature::location() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Feature.location)
+inline const ::route::Point& Feature::location() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:route.Feature.location)
   return _internal_location();
 }
 inline void Feature::unsafe_arena_set_allocated_location(
-    ::Point* PROTOBUF_NULLABLE value) {
+    ::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
     delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.location_);
   }
-  _impl_.location_ = reinterpret_cast<::Point*>(value);
+  _impl_.location_ = reinterpret_cast<::route::Point*>(value);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000002U);
   } else {
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Feature.location)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:route.Feature.location)
 }
-inline ::Point* PROTOBUF_NULLABLE Feature::release_location() {
+inline ::route::Point* PROTOBUF_NULLABLE Feature::release_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* released = _impl_.location_;
+  ::route::Point* released = _impl_.location_;
   _impl_.location_ = nullptr;
   if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
     auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
@@ -1411,31 +1414,31 @@ inline ::Point* PROTOBUF_NULLABLE Feature::release_location() {
   }
   return released;
 }
-inline ::Point* PROTOBUF_NULLABLE Feature::unsafe_arena_release_location() {
+inline ::route::Point* PROTOBUF_NULLABLE Feature::unsafe_arena_release_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:Feature.location)
+  // @@protoc_insertion_point(field_release:route.Feature.location)
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* temp = _impl_.location_;
+  ::route::Point* temp = _impl_.location_;
   _impl_.location_ = nullptr;
   return temp;
 }
-inline ::Point* PROTOBUF_NONNULL Feature::_internal_mutable_location() {
+inline ::route::Point* PROTOBUF_NONNULL Feature::_internal_mutable_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.location_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::Point>(GetArena());
-    _impl_.location_ = reinterpret_cast<::Point*>(p);
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::route::Point>(GetArena());
+    _impl_.location_ = reinterpret_cast<::route::Point*>(p);
   }
   return _impl_.location_;
 }
-inline ::Point* PROTOBUF_NONNULL Feature::mutable_location()
+inline ::route::Point* PROTOBUF_NONNULL Feature::mutable_location()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* _msg = _internal_mutable_location();
-  // @@protoc_insertion_point(field_mutable:Feature.location)
+  ::route::Point* _msg = _internal_mutable_location();
+  // @@protoc_insertion_point(field_mutable:route.Feature.location)
   return _msg;
 }
-inline void Feature::set_allocated_location(::Point* PROTOBUF_NULLABLE value) {
+inline void Feature::set_allocated_location(::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
@@ -1452,15 +1455,15 @@ inline void Feature::set_allocated_location(::Point* PROTOBUF_NULLABLE value) {
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
 
-  _impl_.location_ = reinterpret_cast<::Point*>(value);
-  // @@protoc_insertion_point(field_set_allocated:Feature.location)
+  _impl_.location_ = reinterpret_cast<::route::Point*>(value);
+  // @@protoc_insertion_point(field_set_allocated:route.Feature.location)
 }
 
 // -------------------------------------------------------------------
 
 // Rectangle
 
-// .Point lo = 1;
+// .route.Point lo = 1;
 inline bool Rectangle::has_lo() const {
   bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000001U);
   PROTOBUF_ASSUME(!value || _impl_.lo_ != nullptr);
@@ -1471,34 +1474,34 @@ inline void Rectangle::clear_lo() {
   if (_impl_.lo_ != nullptr) _impl_.lo_->Clear();
   ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
 }
-inline const ::Point& Rectangle::_internal_lo() const {
+inline const ::route::Point& Rectangle::_internal_lo() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::Point* p = _impl_.lo_;
-  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::Point>(&::Point_globals_);
+  const ::route::Point* p = _impl_.lo_;
+  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::route::Point>(&::route::Point_globals_);
 }
-inline const ::Point& Rectangle::lo() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Rectangle.lo)
+inline const ::route::Point& Rectangle::lo() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:route.Rectangle.lo)
   return _internal_lo();
 }
 inline void Rectangle::unsafe_arena_set_allocated_lo(
-    ::Point* PROTOBUF_NULLABLE value) {
+    ::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
     delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.lo_);
   }
-  _impl_.lo_ = reinterpret_cast<::Point*>(value);
+  _impl_.lo_ = reinterpret_cast<::route::Point*>(value);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   } else {
     ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Rectangle.lo)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:route.Rectangle.lo)
 }
-inline ::Point* PROTOBUF_NULLABLE Rectangle::release_lo() {
+inline ::route::Point* PROTOBUF_NULLABLE Rectangle::release_lo() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::Point* released = _impl_.lo_;
+  ::route::Point* released = _impl_.lo_;
   _impl_.lo_ = nullptr;
   if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
     auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
@@ -1513,31 +1516,31 @@ inline ::Point* PROTOBUF_NULLABLE Rectangle::release_lo() {
   }
   return released;
 }
-inline ::Point* PROTOBUF_NULLABLE Rectangle::unsafe_arena_release_lo() {
+inline ::route::Point* PROTOBUF_NULLABLE Rectangle::unsafe_arena_release_lo() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:Rectangle.lo)
+  // @@protoc_insertion_point(field_release:route.Rectangle.lo)
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::Point* temp = _impl_.lo_;
+  ::route::Point* temp = _impl_.lo_;
   _impl_.lo_ = nullptr;
   return temp;
 }
-inline ::Point* PROTOBUF_NONNULL Rectangle::_internal_mutable_lo() {
+inline ::route::Point* PROTOBUF_NONNULL Rectangle::_internal_mutable_lo() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.lo_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::Point>(GetArena());
-    _impl_.lo_ = reinterpret_cast<::Point*>(p);
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::route::Point>(GetArena());
+    _impl_.lo_ = reinterpret_cast<::route::Point*>(p);
   }
   return _impl_.lo_;
 }
-inline ::Point* PROTOBUF_NONNULL Rectangle::mutable_lo()
+inline ::route::Point* PROTOBUF_NONNULL Rectangle::mutable_lo()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  ::Point* _msg = _internal_mutable_lo();
-  // @@protoc_insertion_point(field_mutable:Rectangle.lo)
+  ::route::Point* _msg = _internal_mutable_lo();
+  // @@protoc_insertion_point(field_mutable:route.Rectangle.lo)
   return _msg;
 }
-inline void Rectangle::set_allocated_lo(::Point* PROTOBUF_NULLABLE value) {
+inline void Rectangle::set_allocated_lo(::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
@@ -1554,11 +1557,11 @@ inline void Rectangle::set_allocated_lo(::Point* PROTOBUF_NULLABLE value) {
     ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
   }
 
-  _impl_.lo_ = reinterpret_cast<::Point*>(value);
-  // @@protoc_insertion_point(field_set_allocated:Rectangle.lo)
+  _impl_.lo_ = reinterpret_cast<::route::Point*>(value);
+  // @@protoc_insertion_point(field_set_allocated:route.Rectangle.lo)
 }
 
-// .Point h1 = 2;
+// .route.Point h1 = 2;
 inline bool Rectangle::has_h1() const {
   bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000002U);
   PROTOBUF_ASSUME(!value || _impl_.h1_ != nullptr);
@@ -1569,34 +1572,34 @@ inline void Rectangle::clear_h1() {
   if (_impl_.h1_ != nullptr) _impl_.h1_->Clear();
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
 }
-inline const ::Point& Rectangle::_internal_h1() const {
+inline const ::route::Point& Rectangle::_internal_h1() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::Point* p = _impl_.h1_;
-  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::Point>(&::Point_globals_);
+  const ::route::Point* p = _impl_.h1_;
+  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::route::Point>(&::route::Point_globals_);
 }
-inline const ::Point& Rectangle::h1() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:Rectangle.h1)
+inline const ::route::Point& Rectangle::h1() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:route.Rectangle.h1)
   return _internal_h1();
 }
 inline void Rectangle::unsafe_arena_set_allocated_h1(
-    ::Point* PROTOBUF_NULLABLE value) {
+    ::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
     delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.h1_);
   }
-  _impl_.h1_ = reinterpret_cast<::Point*>(value);
+  _impl_.h1_ = reinterpret_cast<::route::Point*>(value);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000002U);
   } else {
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Rectangle.h1)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:route.Rectangle.h1)
 }
-inline ::Point* PROTOBUF_NULLABLE Rectangle::release_h1() {
+inline ::route::Point* PROTOBUF_NULLABLE Rectangle::release_h1() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* released = _impl_.h1_;
+  ::route::Point* released = _impl_.h1_;
   _impl_.h1_ = nullptr;
   if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
     auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
@@ -1611,31 +1614,31 @@ inline ::Point* PROTOBUF_NULLABLE Rectangle::release_h1() {
   }
   return released;
 }
-inline ::Point* PROTOBUF_NULLABLE Rectangle::unsafe_arena_release_h1() {
+inline ::route::Point* PROTOBUF_NULLABLE Rectangle::unsafe_arena_release_h1() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:Rectangle.h1)
+  // @@protoc_insertion_point(field_release:route.Rectangle.h1)
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* temp = _impl_.h1_;
+  ::route::Point* temp = _impl_.h1_;
   _impl_.h1_ = nullptr;
   return temp;
 }
-inline ::Point* PROTOBUF_NONNULL Rectangle::_internal_mutable_h1() {
+inline ::route::Point* PROTOBUF_NONNULL Rectangle::_internal_mutable_h1() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.h1_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::Point>(GetArena());
-    _impl_.h1_ = reinterpret_cast<::Point*>(p);
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::route::Point>(GetArena());
+    _impl_.h1_ = reinterpret_cast<::route::Point*>(p);
   }
   return _impl_.h1_;
 }
-inline ::Point* PROTOBUF_NONNULL Rectangle::mutable_h1()
+inline ::route::Point* PROTOBUF_NONNULL Rectangle::mutable_h1()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* _msg = _internal_mutable_h1();
-  // @@protoc_insertion_point(field_mutable:Rectangle.h1)
+  ::route::Point* _msg = _internal_mutable_h1();
+  // @@protoc_insertion_point(field_mutable:route.Rectangle.h1)
   return _msg;
 }
-inline void Rectangle::set_allocated_h1(::Point* PROTOBUF_NULLABLE value) {
+inline void Rectangle::set_allocated_h1(::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
@@ -1652,15 +1655,15 @@ inline void Rectangle::set_allocated_h1(::Point* PROTOBUF_NULLABLE value) {
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
 
-  _impl_.h1_ = reinterpret_cast<::Point*>(value);
-  // @@protoc_insertion_point(field_set_allocated:Rectangle.h1)
+  _impl_.h1_ = reinterpret_cast<::route::Point*>(value);
+  // @@protoc_insertion_point(field_set_allocated:route.Rectangle.h1)
 }
 
 // -------------------------------------------------------------------
 
 // RouteNote
 
-// .Point location = 1;
+// .route.Point location = 1;
 inline bool RouteNote::has_location() const {
   bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000002U);
   PROTOBUF_ASSUME(!value || _impl_.location_ != nullptr);
@@ -1671,34 +1674,34 @@ inline void RouteNote::clear_location() {
   if (_impl_.location_ != nullptr) _impl_.location_->Clear();
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
 }
-inline const ::Point& RouteNote::_internal_location() const {
+inline const ::route::Point& RouteNote::_internal_location() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::Point* p = _impl_.location_;
-  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::Point>(&::Point_globals_);
+  const ::route::Point* p = _impl_.location_;
+  return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::route::Point>(&::route::Point_globals_);
 }
-inline const ::Point& RouteNote::location() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:RouteNote.location)
+inline const ::route::Point& RouteNote::location() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:route.RouteNote.location)
   return _internal_location();
 }
 inline void RouteNote::unsafe_arena_set_allocated_location(
-    ::Point* PROTOBUF_NULLABLE value) {
+    ::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
     delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.location_);
   }
-  _impl_.location_ = reinterpret_cast<::Point*>(value);
+  _impl_.location_ = reinterpret_cast<::route::Point*>(value);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000002U);
   } else {
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:RouteNote.location)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:route.RouteNote.location)
 }
-inline ::Point* PROTOBUF_NULLABLE RouteNote::release_location() {
+inline ::route::Point* PROTOBUF_NULLABLE RouteNote::release_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* released = _impl_.location_;
+  ::route::Point* released = _impl_.location_;
   _impl_.location_ = nullptr;
   if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
     auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
@@ -1713,31 +1716,31 @@ inline ::Point* PROTOBUF_NULLABLE RouteNote::release_location() {
   }
   return released;
 }
-inline ::Point* PROTOBUF_NULLABLE RouteNote::unsafe_arena_release_location() {
+inline ::route::Point* PROTOBUF_NULLABLE RouteNote::unsafe_arena_release_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:RouteNote.location)
+  // @@protoc_insertion_point(field_release:route.RouteNote.location)
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* temp = _impl_.location_;
+  ::route::Point* temp = _impl_.location_;
   _impl_.location_ = nullptr;
   return temp;
 }
-inline ::Point* PROTOBUF_NONNULL RouteNote::_internal_mutable_location() {
+inline ::route::Point* PROTOBUF_NONNULL RouteNote::_internal_mutable_location() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (_impl_.location_ == nullptr) {
-    auto* p = ::google::protobuf::Message::DefaultConstruct<::Point>(GetArena());
-    _impl_.location_ = reinterpret_cast<::Point*>(p);
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::route::Point>(GetArena());
+    _impl_.location_ = reinterpret_cast<::route::Point*>(p);
   }
   return _impl_.location_;
 }
-inline ::Point* PROTOBUF_NONNULL RouteNote::mutable_location()
+inline ::route::Point* PROTOBUF_NONNULL RouteNote::mutable_location()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::Point* _msg = _internal_mutable_location();
-  // @@protoc_insertion_point(field_mutable:RouteNote.location)
+  ::route::Point* _msg = _internal_mutable_location();
+  // @@protoc_insertion_point(field_mutable:route.RouteNote.location)
   return _msg;
 }
-inline void RouteNote::set_allocated_location(::Point* PROTOBUF_NULLABLE value) {
+inline void RouteNote::set_allocated_location(::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
@@ -1754,8 +1757,8 @@ inline void RouteNote::set_allocated_location(::Point* PROTOBUF_NULLABLE value) 
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
 
-  _impl_.location_ = reinterpret_cast<::Point*>(value);
-  // @@protoc_insertion_point(field_set_allocated:RouteNote.location)
+  _impl_.location_ = reinterpret_cast<::route::Point*>(value);
+  // @@protoc_insertion_point(field_set_allocated:route.RouteNote.location)
 }
 
 // string message = 2;
@@ -1766,7 +1769,7 @@ inline void RouteNote::clear_message() {
 }
 inline const ::std::string& RouteNote::message() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:RouteNote.message)
+  // @@protoc_insertion_point(field_get:route.RouteNote.message)
   return _internal_message();
 }
 template <typename Arg_, typename... Args_>
@@ -1774,13 +1777,13 @@ PROTOBUF_ALWAYS_INLINE void RouteNote::set_message(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   _impl_.message_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:RouteNote.message)
+  // @@protoc_insertion_point(field_set:route.RouteNote.message)
 }
 inline ::std::string* PROTOBUF_NONNULL RouteNote::mutable_message()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
   ::std::string* _s = _internal_mutable_message();
-  // @@protoc_insertion_point(field_mutable:RouteNote.message)
+  // @@protoc_insertion_point(field_mutable:route.RouteNote.message)
   return _s;
 }
 inline const ::std::string& RouteNote::_internal_message() const {
@@ -1797,7 +1800,7 @@ inline ::std::string* PROTOBUF_NONNULL RouteNote::_internal_mutable_message() {
 }
 inline ::std::string* PROTOBUF_NULLABLE RouteNote::release_message() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:RouteNote.message)
+  // @@protoc_insertion_point(field_release:route.RouteNote.message)
   if (!CheckHasBit(_impl_._has_bits_[0], 0x00000001U)) {
     return nullptr;
   }
@@ -1819,7 +1822,7 @@ inline void RouteNote::set_allocated_message(::std::string* PROTOBUF_NULLABLE va
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.message_.IsDefault()) {
     _impl_.message_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:RouteNote.message)
+  // @@protoc_insertion_point(field_set_allocated:route.RouteNote.message)
 }
 
 // -------------------------------------------------------------------
@@ -1833,13 +1836,13 @@ inline void RouteSummary::clear_point_count() {
   ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
 }
 inline ::int32_t RouteSummary::point_count() const {
-  // @@protoc_insertion_point(field_get:RouteSummary.point_count)
+  // @@protoc_insertion_point(field_get:route.RouteSummary.point_count)
   return _internal_point_count();
 }
 inline void RouteSummary::set_point_count(::int32_t value) {
   _internal_set_point_count(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000001U);
-  // @@protoc_insertion_point(field_set:RouteSummary.point_count)
+  // @@protoc_insertion_point(field_set:route.RouteSummary.point_count)
 }
 inline ::int32_t RouteSummary::_internal_point_count() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1857,13 +1860,13 @@ inline void RouteSummary::clear_feature_count() {
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
 }
 inline ::int32_t RouteSummary::feature_count() const {
-  // @@protoc_insertion_point(field_get:RouteSummary.feature_count)
+  // @@protoc_insertion_point(field_get:route.RouteSummary.feature_count)
   return _internal_feature_count();
 }
 inline void RouteSummary::set_feature_count(::int32_t value) {
   _internal_set_feature_count(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000002U);
-  // @@protoc_insertion_point(field_set:RouteSummary.feature_count)
+  // @@protoc_insertion_point(field_set:route.RouteSummary.feature_count)
 }
 inline ::int32_t RouteSummary::_internal_feature_count() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1881,13 +1884,13 @@ inline void RouteSummary::clear_distance() {
   ClearHasBit(_impl_._has_bits_[0], 0x00000004U);
 }
 inline ::int32_t RouteSummary::distance() const {
-  // @@protoc_insertion_point(field_get:RouteSummary.distance)
+  // @@protoc_insertion_point(field_get:route.RouteSummary.distance)
   return _internal_distance();
 }
 inline void RouteSummary::set_distance(::int32_t value) {
   _internal_set_distance(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000004U);
-  // @@protoc_insertion_point(field_set:RouteSummary.distance)
+  // @@protoc_insertion_point(field_set:route.RouteSummary.distance)
 }
 inline ::int32_t RouteSummary::_internal_distance() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1905,13 +1908,13 @@ inline void RouteSummary::clear_elapsed_tile() {
   ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
 }
 inline ::int32_t RouteSummary::elapsed_tile() const {
-  // @@protoc_insertion_point(field_get:RouteSummary.elapsed_tile)
+  // @@protoc_insertion_point(field_get:route.RouteSummary.elapsed_tile)
   return _internal_elapsed_tile();
 }
 inline void RouteSummary::set_elapsed_tile(::int32_t value) {
   _internal_set_elapsed_tile(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000008U);
-  // @@protoc_insertion_point(field_set:RouteSummary.elapsed_tile)
+  // @@protoc_insertion_point(field_set:route.RouteSummary.elapsed_tile)
 }
 inline ::int32_t RouteSummary::_internal_elapsed_tile() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -1927,6 +1930,7 @@ inline void RouteSummary::_internal_set_elapsed_tile(::int32_t value) {
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace route
 
 
 // @@protoc_insertion_point(global_scope)
