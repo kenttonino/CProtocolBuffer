@@ -38,4 +38,6 @@ build: build-server
 
 run-server: build
 	clear
-	./build/src_server.out
+	# Should be a relative path.
+	# Sample script: make run-server DB_RELATIVE_PATH=utils_database/database.json
+	./build/src_server.out --db_path=$(PATH_HOME)/$(DB_RELATIVE_PATH)
