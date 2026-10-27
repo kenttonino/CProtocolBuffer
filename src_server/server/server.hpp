@@ -2,6 +2,6 @@
 #define SERVER_HPP
 #include <string>
 
-extern void run_server(const std::string& database_path);
+extern void run_server(std::string& database_path);
 
 #endif
