@@ -9,10 +9,33 @@
 #include "../../utils_protos/gen/route.grpc.pb.h"
 #include "../../utils_database/utils_database.hpp"
 
+std::string GetFeatureName(
+  const route::Point& point,
+  const std::vector<route::Feature>& feature_list
+) {
+  for (const route::Feature& f : feature_list) {
+    if (f.location().latitude() == point.latitude() && f.location().longitude() == point.longitude()) {
+      return f.name();
+    }
+  }
+
+  return "";
+}
+
 class RouteImplementation final : public route::Route::Service {
   public:
     explicit RouteImplementation(const std::string& database) {
       utils_database::ParseDatabase(database, &_feature_list);
+    }
+
+    grpc::Status GetFeature(
+      grpc::ServerContext* context,
+      const route::Point* point,
+      route::Feature* feature
+    ) override {
+      feature->set_name(GetFeatureName(*point, _feature_list));
+      feature->mutable_location()->CopyFrom(*point);
+      return grpc::Status::OK;
     }
 
   private:
