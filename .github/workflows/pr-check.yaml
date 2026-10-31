@@ -1,0 +1,30 @@
+name: PR Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup gRPC
+        uses: eWaterCycle/setup-grpc@v5
+        with:
+          grpc-version: 1.65.0
+
+      - name: Symlink to /opt/grpc
+        run: |
+          sudo ln -s "$GRPC_ROOT" /opt/grpc
+
+      - name: Create Build Directory
+        run: mkdir -p build
+
+      - name: Build Server
+        run: make build-server
+
+      - name: Build Client
+        run: make build-client
