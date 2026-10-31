@@ -47,7 +47,7 @@ export PATH="/opt/grpc/bin:$PATH"
 make build
 
 # Run the route server and pass the database relative path.
-make run-server DB_RELATIVE_PATH=utils_database/database.json
+make run-server
 ```
 
 <br />
