@@ -1,6 +1,7 @@
 #include <chrono>
 #include <cmath>
 #include <string>
+#include <iostream>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/server.h>
 #include <grpcpp/server_builder.h>
@@ -65,11 +66,11 @@ class RouteImplementation final : public route::Route::Service {
       return grpc::Status::OK;
     }
 
-    grpc::Status ListFeature(
+    grpc::Status ListFeatures(
       grpc::ServerContext* context,
       const route::Rectangle* rectangle,
       grpc::ServerWriter<route::Feature>* writer
-    ) {
+    ) override {
       auto lo = rectangle->lo();
       auto hi = rectangle->hi();
       long left = (std::min)(lo.longitude(), hi.longitude());
@@ -122,6 +123,30 @@ class RouteImplementation final : public route::Route::Service {
       summary->set_distance(static_cast<long>(distance));
       auto secs = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time);
       summary->set_elapsed_time(secs.count());
+
+      return grpc::Status::OK;
+    }
+
+    grpc::Status RouteChat(
+      grpc::ServerContext* context,
+      grpc::ServerReaderWriter<route::RouteNote, route::RouteNote>* stream
+    ) override {
+      route::RouteNote note;
+
+      while (stream->Read(&note)) {
+        std::unique_lock<std::mutex> lock(_mutex);
+
+        for (const route::RouteNote& n : _received_notes) {
+          if (
+            n.location().latitude() == note.location().latitude() &&
+            n.location().longitude() == note.location().longitude()
+          ) {
+            stream->Write(n);
+          }
+
+          _received_notes.push_back(note);
+        }
+      }
 
       return grpc::Status::OK;
     }
