@@ -28,13 +28,19 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /opt/hostedtoolcache/grpc/1.65.0
-          key: grpc-1.65.0-ubuntu-gcc13
+          key: grpc-1.65.0-ubuntu-gcc13-static
 
-      - name: Setup gRPC
+      - name: Build gRPC (static)
         if: steps.grpc-cache.outputs.cache-hit != 'true'
-        uses: eWaterCycle/setup-grpc@v5
-        with:
-          grpc-version: 1.65.0
+        run: |
+          sudo apt-get update && sudo apt-get install -y libssl-dev zlib1g-dev
+          git clone --depth 1 -b v1.65.0 https://github.com/grpc/grpc /tmp/grpc
+          cd /tmp/grpc
+          mkdir -p cmake/build && cd cmake/build
+          cmake -DgRPC_INSTALL=ON -DBUILD_SHARED_LIBS=OFF \
+                -DCMAKE_INSTALL_PREFIX=/opt/hostedtoolcache/grpc/1.65.0 ..
+          make -j$(nproc)
+          make install
 
       - name: Setup Environment
         run: |
