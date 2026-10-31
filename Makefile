@@ -14,9 +14,16 @@ SOURCE_FILES = $(wildcard ./utils_database/*.cpp) $(wildcard ./utils_protos/gen/
 # ----------------------------------------- #
 # Server specific headers and source files. #
 # ----------------------------------------- #
-HEADERS_CgRPC_SERVER = $(HEADERS_UTILS_PROTOS) $(HEADERS_UTILS_DATABASE) -I$(PATH_HOME)/src_server/server
-SOURCE_FILES_SERVER = $(SOURCE_FILES) $(wildcard ./src_server/server/*.cpp)
-CXXFLAGS_SERVER += $(CPP_STD) $(HEADERS_GRPC_INCLUDE) $(HEADERS_CgRPC_SERVER) ${WARNING_FLAGS}
+SERVER_HEADERS_CgRPC = $(HEADERS_UTILS_PROTOS) $(HEADERS_UTILS_DATABASE) -I$(PATH_HOME)/src_server/server
+SERVER_SOURCE_FILES = $(SOURCE_FILES) $(wildcard ./src_server/server/*.cpp)
+SERVER_CXXFLAGS += $(CPP_STD) $(HEADERS_GRPC_INCLUDE) $(SERVER_HEADERS_CgRPC) ${WARNING_FLAGS}
+
+# ----------------------------------------- #
+# CLient specific headers and source files. #
+# ----------------------------------------- #
+CLIENT_HEADERS_CgRPC = $(HEADERS_UTILS_PROTOS) $(HEADERS_UTILS_DATABASE)
+CLIENT_SOURCE_FILES = $(SOURCE_FILES)
+CLIENT_CXXFLAGS += $(CPP_STD) $(HEADERS_GRPC_INCLUDE) $(CLIENT_HEADERS_CgRPC) $(WARNING_FLAGS)
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------- #
 # -Wl = Pass everything after this comma to the linker (not the compiler), without this, g++ would try to interpret --start-group as its own flag and complain. #
@@ -46,7 +53,10 @@ build-proto:
 	${PROTOC} -I $(PROTOS_PATH) --cpp_out=${PROTOS_PATH}/gen --grpc_out=${PROTOS_PATH}/gen --plugin=protoc-gen-grpc=/opt/grpc/bin/grpc_cpp_plugin utils_protos/route.proto
 
 build-server:
-	${CXX} ${CXXFLAGS_SERVER} ./src_server/main.cpp ${SOURCE_FILES_SERVER} -o ./build/src_server.out ${LDFLAGS} ${LDLIBS}
+	${CXX} ${SERVER_CXXFLAGS} ./src_server/main.cpp ${SERVER_SOURCE_FILES} -o ./build/src_server.out ${LDFLAGS} ${LDLIBS}
+
+build-client:
+	${CXX} ${CLIENT_CXXFLAGS} ./src_client/main.cpp ${CLIENT_SOURCE_FILES} -o ./build/src_client.out ${LDFLAGS} ${LDLIBS}
 
 build: build-proto build-server
 
