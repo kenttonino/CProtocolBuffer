@@ -1,12 +1,12 @@
 CXX = g++
 PATH_HOME = $(shell pwd)
-# Warning flags to suppress.
 WARNING_FLAGS = -Wno-deprecated-declarations
+CPP_STD = -std=c++17
 # Use c++17.
 # Include the grpc headers.
 HEADERS_GRPC_INCLUDE = -I/opt/grpc/include
 HEADERS_CgRPC = -I$(PATH_HOME)/utils_protos/gen -I$(PATH_HOME)/utils_database -I$(PATH_HOME)/src_server/server
-CXXFLAGS += -std=c++17 $(HEADERS_GRPC_INCLUDE) $(HEADERS_CgRPC) ${WARNING_FLAGS}
+CXXFLAGS += $(CPP_STD) $(HEADERS_GRPC_INCLUDE) $(HEADERS_CgRPC) ${WARNING_FLAGS}
 # Source files
 SOURCE_FILES = $(wildcard ./utils_database/*.cpp) $(wildcard ./utils_protos/gen/*.cc) $(wildcard ./src_server/server/*.cpp)
 # LD = Link the dependencies.
@@ -34,7 +34,7 @@ build-proto:
 build-server:
 	${CXX} ${CXXFLAGS} ./src_server/main.cpp ${SOURCE_FILES} -o ./build/src_server.out ${LDFLAGS} ${LDLIBS}
 
-build: build-server
+build: build-proto build-server
 
 run-server: build
 	clear
