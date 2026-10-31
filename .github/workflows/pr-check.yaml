@@ -1,0 +1,60 @@
+name: PR Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      CMAKE_POLICY_VERSION_MINIMUM: "3.5"
+      CC: gcc-13
+      CXX: g++-13
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GCC 13
+        run: |
+          if ! command -v g++-13 &>/dev/null; then
+            sudo apt-get update && sudo apt-get install -y g++-13
+          fi
+
+      - name: Cache gRPC
+        id: grpc-cache
+        uses: actions/cache@v4
+        with:
+          path: /opt/hostedtoolcache/grpc/1.65.0
+          key: grpc-1.65.0-ubuntu-gcc13-static
+
+      - name: Build gRPC (static)
+        if: steps.grpc-cache.outputs.cache-hit != 'true'
+        run: |
+          sudo apt-get update && sudo apt-get install -y libssl-dev zlib1g-dev
+          git clone --depth 1 --recurse-submodules -b v1.65.0 https://github.com/grpc/grpc /tmp/grpc
+          cd /tmp/grpc
+          mkdir -p build && cd build
+          cmake -DgRPC_INSTALL=ON -DBUILD_SHARED_LIBS=OFF \
+                -DCMAKE_INSTALL_PREFIX=/opt/hostedtoolcache/grpc/1.65.0 ..
+          make -j$(nproc)
+          make install
+
+      - name: Setup Environment
+        run: |
+          GRPC_ROOT=/opt/hostedtoolcache/grpc/1.65.0
+          echo "GRPC_ROOT=$GRPC_ROOT" >> $GITHUB_ENV
+          echo "$GRPC_ROOT/bin" >> $GITHUB_PATH
+          echo "LD_LIBRARY_PATH=$GRPC_ROOT/lib" >> $GITHUB_ENV
+          echo "CMAKE_PREFIX_PATH=$GRPC_ROOT" >> $GITHUB_ENV
+          sudo ln -sf "$GRPC_ROOT" /opt/grpc
+
+      - name: Build Server
+        run: |
+          mkdir -p build
+          make build-server
+
+      - name: Build Client
+        run: make build-client
