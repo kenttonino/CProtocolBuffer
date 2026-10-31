@@ -21,7 +21,7 @@ message Feature {
 // A latitude-longitude rectangle, represented as two diagonally opposite points "lo" and "hi".
 message Rectangle {
   Point lo = 1;
-  Point h1 = 2;
+  Point hi = 2;
 }
 
 // A message sent while at a given point.
@@ -37,7 +37,7 @@ message RouteSummary {
   int32 point_count = 1;
   int32 feature_count = 2;
   int32 distance = 3;
-  int32 elapsed_tile = 4;
+  int32 elapsed_time = 4;
 }
 
 // Server exported interface.

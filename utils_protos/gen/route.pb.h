@@ -258,7 +258,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
     kPointCountFieldNumber = 1,
     kFeatureCountFieldNumber = 2,
     kDistanceFieldNumber = 3,
-    kElapsedTileFieldNumber = 4,
+    kElapsedTimeFieldNumber = 4,
   };
   // int32 point_count = 1;
   void clear_point_count() ;
@@ -290,14 +290,14 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
   void _internal_set_distance(::int32_t value);
 
   public:
-  // int32 elapsed_tile = 4;
-  void clear_elapsed_tile() ;
-  [[nodiscard]] ::int32_t elapsed_tile() const;
-  void set_elapsed_tile(::int32_t value);
+  // int32 elapsed_time = 4;
+  void clear_elapsed_time() ;
+  [[nodiscard]] ::int32_t elapsed_time() const;
+  void set_elapsed_time(::int32_t value);
 
   private:
-  ::int32_t _internal_elapsed_tile() const;
-  void _internal_set_elapsed_tile(::int32_t value);
+  ::int32_t _internal_elapsed_time() const;
+  void _internal_set_elapsed_time(::int32_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:route.RouteSummary)
@@ -336,7 +336,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
     ::int32_t point_count_;
     ::int32_t feature_count_;
     ::int32_t distance_;
-    ::int32_t elapsed_tile_;
+    ::int32_t elapsed_time_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -930,7 +930,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::
   // accessors -------------------------------------------------------
   enum : int {
     kLoFieldNumber = 1,
-    kH1FieldNumber = 2,
+    kHiFieldNumber = 2,
   };
   // .route.Point lo = 1;
   [[nodiscard]] bool has_lo()
@@ -948,20 +948,20 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::
   ::route::Point* PROTOBUF_NONNULL _internal_mutable_lo();
 
   public:
-  // .route.Point h1 = 2;
-  [[nodiscard]] bool has_h1()
+  // .route.Point hi = 2;
+  [[nodiscard]] bool has_hi()
       const;
-  void clear_h1() ;
-  [[nodiscard]] const ::route::Point& h1() const;
-  [[nodiscard]] ::route::Point* PROTOBUF_NULLABLE release_h1();
-  ::route::Point* PROTOBUF_NONNULL mutable_h1();
-  void set_allocated_h1(::route::Point* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_h1(::route::Point* PROTOBUF_NULLABLE value);
-  ::route::Point* PROTOBUF_NULLABLE unsafe_arena_release_h1();
+  void clear_hi() ;
+  [[nodiscard]] const ::route::Point& hi() const;
+  [[nodiscard]] ::route::Point* PROTOBUF_NULLABLE release_hi();
+  ::route::Point* PROTOBUF_NONNULL mutable_hi();
+  void set_allocated_hi(::route::Point* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_hi(::route::Point* PROTOBUF_NULLABLE value);
+  ::route::Point* PROTOBUF_NULLABLE unsafe_arena_release_hi();
 
   private:
-  const ::route::Point& _internal_h1() const;
-  ::route::Point* PROTOBUF_NONNULL _internal_mutable_h1();
+  const ::route::Point& _internal_hi() const;
+  ::route::Point* PROTOBUF_NONNULL _internal_mutable_hi();
 
   public:
   // @@protoc_insertion_point(class_scope:route.Rectangle)
@@ -998,7 +998,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED Rectangle final : public ::google::
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::route::Point* PROTOBUF_NULLABLE lo_;
-    ::route::Point* PROTOBUF_NULLABLE h1_;
+    ::route::Point* PROTOBUF_NULLABLE hi_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1561,46 +1561,46 @@ inline void Rectangle::set_allocated_lo(::route::Point* PROTOBUF_NULLABLE value)
   // @@protoc_insertion_point(field_set_allocated:route.Rectangle.lo)
 }
 
-// .route.Point h1 = 2;
-inline bool Rectangle::has_h1() const {
+// .route.Point hi = 2;
+inline bool Rectangle::has_hi() const {
   bool value = CheckHasBit(_impl_._has_bits_[0], 0x00000002U);
-  PROTOBUF_ASSUME(!value || _impl_.h1_ != nullptr);
+  PROTOBUF_ASSUME(!value || _impl_.hi_ != nullptr);
   return value;
 }
-inline void Rectangle::clear_h1() {
+inline void Rectangle::clear_hi() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.h1_ != nullptr) _impl_.h1_->Clear();
+  if (_impl_.hi_ != nullptr) _impl_.hi_->Clear();
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
 }
-inline const ::route::Point& Rectangle::_internal_h1() const {
+inline const ::route::Point& Rectangle::_internal_hi() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  const ::route::Point* p = _impl_.h1_;
+  const ::route::Point* p = _impl_.hi_;
   return p != nullptr ? *p : *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<::route::Point>(&::route::Point_globals_);
 }
-inline const ::route::Point& Rectangle::h1() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:route.Rectangle.h1)
-  return _internal_h1();
+inline const ::route::Point& Rectangle::hi() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:route.Rectangle.hi)
+  return _internal_hi();
 }
-inline void Rectangle::unsafe_arena_set_allocated_h1(
+inline void Rectangle::unsafe_arena_set_allocated_hi(
     ::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (GetArena() == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.h1_);
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.hi_);
   }
-  _impl_.h1_ = reinterpret_cast<::route::Point*>(value);
+  _impl_.hi_ = reinterpret_cast<::route::Point*>(value);
   if (value != nullptr) {
     SetHasBit(_impl_._has_bits_[0], 0x00000002U);
   } else {
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:route.Rectangle.h1)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:route.Rectangle.hi)
 }
-inline ::route::Point* PROTOBUF_NULLABLE Rectangle::release_h1() {
+inline ::route::Point* PROTOBUF_NULLABLE Rectangle::release_hi() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::route::Point* released = _impl_.h1_;
-  _impl_.h1_ = nullptr;
+  ::route::Point* released = _impl_.hi_;
+  _impl_.hi_ = nullptr;
   if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
     auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
     released = ::google::protobuf::internal::DuplicateIfNonNull(released);
@@ -1614,35 +1614,35 @@ inline ::route::Point* PROTOBUF_NULLABLE Rectangle::release_h1() {
   }
   return released;
 }
-inline ::route::Point* PROTOBUF_NULLABLE Rectangle::unsafe_arena_release_h1() {
+inline ::route::Point* PROTOBUF_NULLABLE Rectangle::unsafe_arena_release_hi() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:route.Rectangle.h1)
+  // @@protoc_insertion_point(field_release:route.Rectangle.hi)
 
   ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::route::Point* temp = _impl_.h1_;
-  _impl_.h1_ = nullptr;
+  ::route::Point* temp = _impl_.hi_;
+  _impl_.hi_ = nullptr;
   return temp;
 }
-inline ::route::Point* PROTOBUF_NONNULL Rectangle::_internal_mutable_h1() {
+inline ::route::Point* PROTOBUF_NONNULL Rectangle::_internal_mutable_hi() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  if (_impl_.h1_ == nullptr) {
+  if (_impl_.hi_ == nullptr) {
     auto* p = ::google::protobuf::Message::DefaultConstruct<::route::Point>(GetArena());
-    _impl_.h1_ = reinterpret_cast<::route::Point*>(p);
+    _impl_.hi_ = reinterpret_cast<::route::Point*>(p);
   }
-  return _impl_.h1_;
+  return _impl_.hi_;
 }
-inline ::route::Point* PROTOBUF_NONNULL Rectangle::mutable_h1()
+inline ::route::Point* PROTOBUF_NONNULL Rectangle::mutable_hi()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   SetHasBit(_impl_._has_bits_[0], 0x00000002U);
-  ::route::Point* _msg = _internal_mutable_h1();
-  // @@protoc_insertion_point(field_mutable:route.Rectangle.h1)
+  ::route::Point* _msg = _internal_mutable_hi();
+  // @@protoc_insertion_point(field_mutable:route.Rectangle.hi)
   return _msg;
 }
-inline void Rectangle::set_allocated_h1(::route::Point* PROTOBUF_NULLABLE value) {
+inline void Rectangle::set_allocated_hi(::route::Point* PROTOBUF_NULLABLE value) {
   ::google::protobuf::Arena* message_arena = GetArena();
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (message_arena == nullptr) {
-    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.h1_);
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.hi_);
   }
 
   if (value != nullptr) {
@@ -1655,8 +1655,8 @@ inline void Rectangle::set_allocated_h1(::route::Point* PROTOBUF_NULLABLE value)
     ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
   }
 
-  _impl_.h1_ = reinterpret_cast<::route::Point*>(value);
-  // @@protoc_insertion_point(field_set_allocated:route.Rectangle.h1)
+  _impl_.hi_ = reinterpret_cast<::route::Point*>(value);
+  // @@protoc_insertion_point(field_set_allocated:route.Rectangle.hi)
 }
 
 // -------------------------------------------------------------------
@@ -1901,28 +1901,28 @@ inline void RouteSummary::_internal_set_distance(::int32_t value) {
   _impl_.distance_ = value;
 }
 
-// int32 elapsed_tile = 4;
-inline void RouteSummary::clear_elapsed_tile() {
+// int32 elapsed_time = 4;
+inline void RouteSummary::clear_elapsed_time() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.elapsed_tile_ = 0;
+  _impl_.elapsed_time_ = 0;
   ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
 }
-inline ::int32_t RouteSummary::elapsed_tile() const {
-  // @@protoc_insertion_point(field_get:route.RouteSummary.elapsed_tile)
-  return _internal_elapsed_tile();
+inline ::int32_t RouteSummary::elapsed_time() const {
+  // @@protoc_insertion_point(field_get:route.RouteSummary.elapsed_time)
+  return _internal_elapsed_time();
 }
-inline void RouteSummary::set_elapsed_tile(::int32_t value) {
-  _internal_set_elapsed_tile(value);
+inline void RouteSummary::set_elapsed_time(::int32_t value) {
+  _internal_set_elapsed_time(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000008U);
-  // @@protoc_insertion_point(field_set:route.RouteSummary.elapsed_tile)
+  // @@protoc_insertion_point(field_set:route.RouteSummary.elapsed_time)
 }
-inline ::int32_t RouteSummary::_internal_elapsed_tile() const {
+inline ::int32_t RouteSummary::_internal_elapsed_time() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.elapsed_tile_;
+  return _impl_.elapsed_time_;
 }
-inline void RouteSummary::_internal_set_elapsed_tile(::int32_t value) {
+inline void RouteSummary::_internal_set_elapsed_time(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.elapsed_tile_ = value;
+  _impl_.elapsed_time_ = value;
 }
 
 #ifdef __GNUC__

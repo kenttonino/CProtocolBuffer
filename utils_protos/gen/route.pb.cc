@@ -69,10 +69,10 @@ constexpr RouteSummary::ParseTableT_ RouteSummary::InternalGenerateParseTable_(c
       ::_pbi::TcParser::GetTable<::route::RouteSummary>(),  // to_prefetch
       #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
     }, {{
-      // int32 elapsed_tile = 4;
-      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RouteSummary, _impl_.elapsed_tile_), 3>(),
+      // int32 elapsed_time = 4;
+      {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RouteSummary, _impl_.elapsed_time_), 3>(),
        {32, 3, 0,
-        PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.elapsed_tile_)}},
+        PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.elapsed_time_)}},
       // int32 point_count = 1;
       {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(RouteSummary, _impl_.point_count_), 0>(),
        {8, 0, 0,
@@ -94,8 +94,8 @@ constexpr RouteSummary::ParseTableT_ RouteSummary::InternalGenerateParseTable_(c
       {PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.feature_count_), _Internal::kHasBitsOffset + 1, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
       // int32 distance = 3;
       {PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.distance_), _Internal::kHasBitsOffset + 2, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
-      // int32 elapsed_tile = 4;
-      {PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.elapsed_tile_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+      // int32 elapsed_time = 4;
+      {PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.elapsed_time_), _Internal::kHasBitsOffset + 3, 0, (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
     }},
     // no aux_entries
     {{
@@ -111,7 +111,7 @@ inline constexpr RouteSummary::Impl_::Impl_(
         point_count_{0},
         feature_count_{0},
         distance_{0},
-        elapsed_tile_{0} {}
+        elapsed_time_{0} {}
 
 template <typename>
 constexpr RouteSummary::RouteSummary(::_pbi::ConstantInitialized,
@@ -538,10 +538,10 @@ constexpr Rectangle::ParseTableT_ Rectangle::InternalGenerateParseTable_(const :
       ::_pbi::TcParser::GetTable<::route::Rectangle>(),  // to_prefetch
       #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
     }, {{
-      // .route.Point h1 = 2;
+      // .route.Point hi = 2;
       {::_pbi::TcParser::FastMtS1,
        {18, 1, 1,
-        PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.h1_)}},
+        PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.hi_)}},
       // .route.Point lo = 1;
       {::_pbi::TcParser::FastMtS1,
        {10, 0, 0,
@@ -551,8 +551,8 @@ constexpr Rectangle::ParseTableT_ Rectangle::InternalGenerateParseTable_(const :
     }}, {{
       // .route.Point lo = 1;
       {PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.lo_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
-      // .route.Point h1 = 2;
-      {PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.h1_), _Internal::kHasBitsOffset + 1, 1, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+      // .route.Point hi = 2;
+      {PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.hi_), _Internal::kHasBitsOffset + 1, 1, (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
     }},
     {{
         #ifndef PROTOBUF_MESSAGE_GLOBALS
@@ -577,7 +577,7 @@ inline constexpr Rectangle::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         lo_{nullptr},
-        h1_{nullptr} {}
+        hi_{nullptr} {}
 
 template <typename>
 constexpr Rectangle::Rectangle(::_pbi::ConstantInitialized,
@@ -856,7 +856,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::route::Rectangle, _impl_._has_bits_),
         5, // hasbit index offset
         PROTOBUF_FIELD_OFFSET(::route::Rectangle, _impl_.lo_),
-        PROTOBUF_FIELD_OFFSET(::route::Rectangle, _impl_.h1_),
+        PROTOBUF_FIELD_OFFSET(::route::Rectangle, _impl_.hi_),
         0,
         1,
         0x081, // bitmap
@@ -872,7 +872,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::route::RouteSummary, _impl_.point_count_),
         PROTOBUF_FIELD_OFFSET(::route::RouteSummary, _impl_.feature_count_),
         PROTOBUF_FIELD_OFFSET(::route::RouteSummary, _impl_.distance_),
-        PROTOBUF_FIELD_OFFSET(::route::RouteSummary, _impl_.elapsed_tile_),
+        PROTOBUF_FIELD_OFFSET(::route::RouteSummary, _impl_.elapsed_time_),
         0,
         1,
         2,
@@ -901,11 +901,11 @@ const char descriptor_table_protodef_route_2eproto[] ABSL_ATTRIBUTE_SECTION_VARI
     "e\030\001 \001(\005\022\021\n\tlongitude\030\002 \001(\005\"7\n\007Feature\022\014\n"
     "\004name\030\001 \001(\t\022\036\n\010location\030\002 \001(\0132\014.route.Po"
     "int\"\?\n\tRectangle\022\030\n\002lo\030\001 \001(\0132\014.route.Poi"
-    "nt\022\030\n\002h1\030\002 \001(\0132\014.route.Point\"<\n\tRouteNot"
+    "nt\022\030\n\002hi\030\002 \001(\0132\014.route.Point\"<\n\tRouteNot"
     "e\022\036\n\010location\030\001 \001(\0132\014.route.Point\022\017\n\007mes"
     "sage\030\002 \001(\t\"b\n\014RouteSummary\022\023\n\013point_coun"
     "t\030\001 \001(\005\022\025\n\rfeature_count\030\002 \001(\005\022\020\n\010distan"
-    "ce\030\003 \001(\005\022\024\n\014elapsed_tile\030\004 \001(\0052\330\001\n\005Route"
+    "ce\030\003 \001(\005\022\024\n\014elapsed_time\030\004 \001(\0052\330\001\n\005Route"
     "\022,\n\nGetFeature\022\014.route.Point\032\016.route.Fea"
     "ture\"\000\0224\n\014ListFeatures\022\020.route.Rectangle"
     "\032\016.route.Feature\"\0000\001\0224\n\013RecordRoute\022\014.ro"
@@ -1446,8 +1446,8 @@ Rectangle::Rectangle(
   _impl_.lo_ = (CheckHasBit(cached_has_bits, 0x00000001U))
                 ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.lo_)
                 : nullptr;
-  _impl_.h1_ = (CheckHasBit(cached_has_bits, 0x00000002U))
-                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.h1_)
+  _impl_.hi_ = (CheckHasBit(cached_has_bits, 0x00000002U))
+                ? ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.hi_)
                 : nullptr;
 
   // @@protoc_insertion_point(copy_constructor:route.Rectangle)
@@ -1462,9 +1462,9 @@ inline void Rectangle::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   ::memset(reinterpret_cast<char*>(&_impl_) +
                offsetof(Impl_, lo_),
            0,
-           offsetof(Impl_, h1_) -
+           offsetof(Impl_, hi_) -
                offsetof(Impl_, lo_) +
-               sizeof(Impl_::h1_));
+               sizeof(Impl_::hi_));
 }
 Rectangle::~Rectangle() {
   // @@protoc_insertion_point(destructor:route.Rectangle)
@@ -1478,7 +1478,7 @@ inline void Rectangle::SharedDtor(MessageLite& self) {
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   delete this_._impl_.lo_;
-  delete this_._impl_.h1_;
+  delete this_._impl_.hi_;
   this_._impl_.~Impl_();
 }
 
@@ -1522,8 +1522,8 @@ PROTOBUF_NOINLINE void Rectangle::Clear() {
       _impl_.lo_->Clear();
     }
     if (CheckHasBit(cached_has_bits, 0x00000002U)) {
-      ABSL_DCHECK(_impl_.h1_ != nullptr);
-      _impl_.h1_->Clear();
+      ABSL_DCHECK(_impl_.hi_ != nullptr);
+      _impl_.hi_->Clear();
     }
   }
   _impl_._has_bits_.Clear();
@@ -1556,10 +1556,10 @@ PROTOBUF_NOINLINE void Rectangle::Clear() {
         stream);
   }
 
-  // .route.Point h1 = 2;
+  // .route.Point hi = 2;
   if (CheckHasBit(cached_has_bits, 0x00000002U)) {
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-        2, *this_._impl_.h1_, this_._impl_.h1_->GetCachedSize(), target,
+        2, *this_._impl_.hi_, this_._impl_.hi_->GetCachedSize(), target,
         stream);
   }
 
@@ -1594,10 +1594,10 @@ PROTOBUF_NOINLINE void Rectangle::Clear() {
       total_size += 1 +
                     ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.lo_);
     }
-    // .route.Point h1 = 2;
+    // .route.Point hi = 2;
     if (CheckHasBit(cached_has_bits, 0x00000002U)) {
       total_size += 1 +
-                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.h1_);
+                    ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.hi_);
     }
   }
   return this_.MaybeComputeUnknownFieldsSize(total_size,
@@ -1628,11 +1628,11 @@ void Rectangle::MergeImpl(::google::protobuf::MessageLite& to_msg,
       }
     }
     if (CheckHasBit(cached_has_bits, 0x00000002U)) {
-      ABSL_DCHECK(from._impl_.h1_ != nullptr);
-      if (_this->_impl_.h1_ == nullptr) {
-        _this->_impl_.h1_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.h1_);
+      ABSL_DCHECK(from._impl_.hi_ != nullptr);
+      if (_this->_impl_.hi_ == nullptr) {
+        _this->_impl_.hi_ = ::google::protobuf::Message::CopyConstruct(arena, *from._impl_.hi_);
       } else {
-        _this->_impl_.h1_->MergeFrom(*from._impl_.h1_);
+        _this->_impl_.hi_->MergeFrom(*from._impl_.hi_);
       }
     }
   }
@@ -1654,8 +1654,8 @@ void Rectangle::InternalSwap(Rectangle* PROTOBUF_RESTRICT PROTOBUF_NONNULL other
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.h1_)
-      + sizeof(Rectangle::_impl_.h1_)
+      PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.hi_)
+      + sizeof(Rectangle::_impl_.hi_)
       - PROTOBUF_FIELD_OFFSET(Rectangle, _impl_.lo_)>(
           reinterpret_cast<char*>(&_impl_.lo_),
           reinterpret_cast<char*>(&other->_impl_.lo_));
@@ -1947,9 +1947,9 @@ inline void RouteSummary::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   ::memset(reinterpret_cast<char*>(&_impl_) +
                offsetof(Impl_, point_count_),
            0,
-           offsetof(Impl_, elapsed_tile_) -
+           offsetof(Impl_, elapsed_time_) -
                offsetof(Impl_, point_count_) +
-               sizeof(Impl_::elapsed_tile_));
+               sizeof(Impl_::elapsed_time_));
 }
 RouteSummary::~RouteSummary() {
   // @@protoc_insertion_point(destructor:route.RouteSummary)
@@ -2001,8 +2001,8 @@ PROTOBUF_NOINLINE void RouteSummary::Clear() {
   cached_has_bits = _impl_._has_bits_[0];
   if (BatchCheckHasBit(cached_has_bits, 0x0000000fU)) {
     ::memset(&_impl_.point_count_, 0, static_cast<::size_t>(
-        reinterpret_cast<char*>(&_impl_.elapsed_tile_) -
-        reinterpret_cast<char*>(&_impl_.point_count_)) + sizeof(_impl_.elapsed_tile_));
+        reinterpret_cast<char*>(&_impl_.elapsed_time_) -
+        reinterpret_cast<char*>(&_impl_.point_count_)) + sizeof(_impl_.elapsed_time_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
@@ -2054,12 +2054,12 @@ PROTOBUF_NOINLINE void RouteSummary::Clear() {
     }
   }
 
-  // int32 elapsed_tile = 4;
+  // int32 elapsed_time = 4;
   if (CheckHasBit(cached_has_bits, 0x00000008U)) {
-    if (this_._internal_elapsed_tile() != 0) {
+    if (this_._internal_elapsed_time() != 0) {
       target =
           ::google::protobuf::internal::WireFormatLite::WriteInt32ToArrayWithField<4>(
-              stream, this_._internal_elapsed_tile(), target);
+              stream, this_._internal_elapsed_time(), target);
     }
   }
 
@@ -2110,11 +2110,11 @@ PROTOBUF_NOINLINE void RouteSummary::Clear() {
             this_._internal_distance());
       }
     }
-    // int32 elapsed_tile = 4;
+    // int32 elapsed_time = 4;
     if (CheckHasBit(cached_has_bits, 0x00000008U)) {
-      if (this_._internal_elapsed_tile() != 0) {
+      if (this_._internal_elapsed_time() != 0) {
         total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-            this_._internal_elapsed_tile());
+            this_._internal_elapsed_time());
       }
     }
   }
@@ -2152,8 +2152,8 @@ void RouteSummary::MergeImpl(::google::protobuf::MessageLite& to_msg,
       }
     }
     if (CheckHasBit(cached_has_bits, 0x00000008U)) {
-      if (from._internal_elapsed_tile() != 0) {
-        _this->_impl_.elapsed_tile_ = from._impl_.elapsed_tile_;
+      if (from._internal_elapsed_time() != 0) {
+        _this->_impl_.elapsed_time_ = from._impl_.elapsed_time_;
       }
     }
   }
@@ -2175,8 +2175,8 @@ void RouteSummary::InternalSwap(RouteSummary* PROTOBUF_RESTRICT PROTOBUF_NONNULL
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.elapsed_tile_)
-      + sizeof(RouteSummary::_impl_.elapsed_tile_)
+      PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.elapsed_time_)
+      + sizeof(RouteSummary::_impl_.elapsed_time_)
       - PROTOBUF_FIELD_OFFSET(RouteSummary, _impl_.point_count_)>(
           reinterpret_cast<char*>(&_impl_.point_count_),
           reinterpret_cast<char*>(&other->_impl_.point_count_));
