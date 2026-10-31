@@ -258,7 +258,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
     kPointCountFieldNumber = 1,
     kFeatureCountFieldNumber = 2,
     kDistanceFieldNumber = 3,
-    kElapsedTileFieldNumber = 4,
+    kElapsedTimeFieldNumber = 4,
   };
   // int32 point_count = 1;
   void clear_point_count() ;
@@ -290,14 +290,14 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
   void _internal_set_distance(::int32_t value);
 
   public:
-  // int32 elapsed_tile = 4;
-  void clear_elapsed_tile() ;
-  [[nodiscard]] ::int32_t elapsed_tile() const;
-  void set_elapsed_tile(::int32_t value);
+  // int32 elapsed_time = 4;
+  void clear_elapsed_time() ;
+  [[nodiscard]] ::int32_t elapsed_time() const;
+  void set_elapsed_time(::int32_t value);
 
   private:
-  ::int32_t _internal_elapsed_tile() const;
-  void _internal_set_elapsed_tile(::int32_t value);
+  ::int32_t _internal_elapsed_time() const;
+  void _internal_set_elapsed_time(::int32_t value);
 
   public:
   // @@protoc_insertion_point(class_scope:route.RouteSummary)
@@ -336,7 +336,7 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED RouteSummary final : public ::googl
     ::int32_t point_count_;
     ::int32_t feature_count_;
     ::int32_t distance_;
-    ::int32_t elapsed_tile_;
+    ::int32_t elapsed_time_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -1901,28 +1901,28 @@ inline void RouteSummary::_internal_set_distance(::int32_t value) {
   _impl_.distance_ = value;
 }
 
-// int32 elapsed_tile = 4;
-inline void RouteSummary::clear_elapsed_tile() {
+// int32 elapsed_time = 4;
+inline void RouteSummary::clear_elapsed_time() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.elapsed_tile_ = 0;
+  _impl_.elapsed_time_ = 0;
   ClearHasBit(_impl_._has_bits_[0], 0x00000008U);
 }
-inline ::int32_t RouteSummary::elapsed_tile() const {
-  // @@protoc_insertion_point(field_get:route.RouteSummary.elapsed_tile)
-  return _internal_elapsed_tile();
+inline ::int32_t RouteSummary::elapsed_time() const {
+  // @@protoc_insertion_point(field_get:route.RouteSummary.elapsed_time)
+  return _internal_elapsed_time();
 }
-inline void RouteSummary::set_elapsed_tile(::int32_t value) {
-  _internal_set_elapsed_tile(value);
+inline void RouteSummary::set_elapsed_time(::int32_t value) {
+  _internal_set_elapsed_time(value);
   SetHasBit(_impl_._has_bits_[0], 0x00000008U);
-  // @@protoc_insertion_point(field_set:route.RouteSummary.elapsed_tile)
+  // @@protoc_insertion_point(field_set:route.RouteSummary.elapsed_time)
 }
-inline ::int32_t RouteSummary::_internal_elapsed_tile() const {
+inline ::int32_t RouteSummary::_internal_elapsed_time() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.elapsed_tile_;
+  return _impl_.elapsed_time_;
 }
-inline void RouteSummary::_internal_set_elapsed_tile(::int32_t value) {
+inline void RouteSummary::_internal_set_elapsed_time(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.elapsed_tile_ = value;
+  _impl_.elapsed_time_ = value;
 }
 
 #ifdef __GNUC__
