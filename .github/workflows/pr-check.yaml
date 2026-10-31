@@ -8,6 +8,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      CMAKE_POLICY_VERSION_MINIMUM: "3.5"
+
     steps:
       - uses: actions/checkout@v4
 
