@@ -39,6 +39,32 @@ class RouteClientService {
       GetOneFeature(point, &feature);
     }
 
+    void ListFeatures() {
+      route::Rectangle rectangle;
+      route::Feature feature;
+      grpc::ClientContext context;
+
+      rectangle.mutable_lo()->set_latitude(400000000);
+      rectangle.mutable_lo()->set_longitude(-750000000);
+      rectangle.mutable_hi()->set_latitude(420000000);
+      rectangle.mutable_hi()->set_longitude(-730000000);
+      std::cout << "Looking for features between, 40, -75 and 42, -73" << std::endl;
+
+      std::unique_ptr<grpc::ClientReader<route::Feature>> reader(_stub->ListFeatures(&context, rectangle));
+      while (reader->Read(&feature)) {
+        std::cout << "Found feature called " << feature.name() << " at "
+                  << feature.location().latitude() / _kCoordinateFactor << ", "
+                  << feature.location().longitude() / _kCoordinateFactor << std::endl;
+      }
+
+      grpc::Status status = reader->Finish();
+      if (status.ok()) {
+        std::cout << "ListFeatures rpc succeeded." << std::endl;
+      } else {
+        std::cout << "ListFeatures rpc failed." << std::endl;
+      }
+    }
+
   private:
     bool GetOneFeature(
       const route::Point& point,
