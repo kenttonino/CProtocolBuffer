@@ -23,20 +23,32 @@ jobs:
             sudo apt-get update && sudo apt-get install -y g++-13
           fi
 
+      - name: Cache gRPC
+        id: grpc-cache
+        uses: actions/cache@v4
+        with:
+          path: /opt/hostedtoolcache/grpc/1.65.0
+          key: grpc-1.65.0-ubuntu-gcc13
+
       - name: Setup gRPC
+        if: steps.grpc-cache.outputs.cache-hit != 'true'
         uses: eWaterCycle/setup-grpc@v5
         with:
           grpc-version: 1.65.0
 
-      - name: Symlink to /opt/grpc
+      - name: Setup Environment
         run: |
-          sudo ln -s "$GRPC_ROOT" /opt/grpc
-
-      - name: Create Build Directory
-        run: mkdir -p build
+          GRPC_ROOT=/opt/hostedtoolcache/grpc/1.65.0
+          echo "GRPC_ROOT=$GRPC_ROOT" >> $GITHUB_ENV
+          echo "$GRPC_ROOT/bin" >> $GITHUB_PATH
+          echo "LD_LIBRARY_PATH=$GRPC_ROOT/lib" >> $GITHUB_ENV
+          echo "CMAKE_PREFIX_PATH=$GRPC_ROOT" >> $GITHUB_ENV
+          sudo ln -sf "$GRPC_ROOT" /opt/grpc
 
       - name: Build Server
-        run: make build-server
+        run: |
+          mkdir -p build
+          make build-server
 
       - name: Build Client
         run: make build-client
