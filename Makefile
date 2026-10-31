@@ -2,10 +2,13 @@ CXX = g++
 PATH_HOME = $(shell pwd)
 WARNING_FLAGS = -Wno-deprecated-declarations
 CPP_STD = -std=c++17
-# Use c++17.
+
 # Include the grpc headers.
 HEADERS_GRPC_INCLUDE = -I/opt/grpc/include
-HEADERS_CgRPC = -I$(PATH_HOME)/utils_protos/gen -I$(PATH_HOME)/utils_database -I$(PATH_HOME)/src_server/server
+HEADERS_UTILS_PROTOS = -I$(PATH_HOME)/utils_protos/gen
+HEADERS_UTILS_DATABASE = -I$(PATH_HOME)/utils_database
+
+HEADERS_CgRPC = $(HEADERS_UTILS_PROTOS) $(HEADERS_UTILS_DATABASE) -I$(PATH_HOME)/src_server/server
 CXXFLAGS += $(CPP_STD) $(HEADERS_GRPC_INCLUDE) $(HEADERS_CgRPC) ${WARNING_FLAGS}
 # Source files
 SOURCE_FILES = $(wildcard ./utils_database/*.cpp) $(wildcard ./utils_protos/gen/*.cc) $(wildcard ./src_server/server/*.cpp)
