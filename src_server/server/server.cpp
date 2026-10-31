@@ -50,9 +50,9 @@ std::string GetFeatureName(
   return "";
 }
 
-class RouteServer final : public route::Route::Service {
+class RouteServerService final : public route::Route::Service {
   public:
-    explicit RouteServer(const std::string& database) {
+    explicit RouteServerService(const std::string& database) {
       utils_database::ParseDatabase(database, &_feature_list);
     }
 
@@ -159,7 +159,7 @@ class RouteServer final : public route::Route::Service {
 
 void run_server(std::string& database_path) {
   std::string server_address("0.0.0.0:50051");
-  RouteServer service(database_path);
+  RouteServerService service(database_path);
 
   grpc::ServerBuilder builder;
   builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
