@@ -38,6 +38,30 @@ class RouteImplementation final : public route::Route::Service {
       return grpc::Status::OK;
     }
 
+    grpc::Status ListFeature(
+      grpc::ServerContext* context,
+      const route::Rectangle* rectangle,
+      grpc::ServerWriter<route::Feature>* writer
+    ) {
+      auto lo = rectangle->lo();
+      auto hi = rectangle->hi();
+      long left = (std::min)(lo.longitude(), hi.longitude());
+      long right = (std::max)(lo.longitude(), hi.longitude());
+      long top = (std::max)(lo.latitude(), hi.latitude());
+      long bottom = (std::min)(lo.latitude(), hi.latitude());
+      for (const route::Feature& f : _feature_list) {
+        if (
+            f.location().longitude() >= left &&
+            f.location().longitude() <= right &&
+            f.location().latitude() >= bottom &&
+            f.location().latitude() <= top
+        ) {
+          writer->Write(f);
+        }
+      }
+      return grpc::Status::OK;
+    }
+
   private:
     std::vector<route::Feature> _feature_list;
     std::mutex _mutex;
