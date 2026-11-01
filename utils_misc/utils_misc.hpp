@@ -17,6 +17,11 @@
 #define GREEN "\e[0;32m"
 #define RESET "\e[0m"
 
+// ------------------------------ //
+// Both use by client and server. //
+// ------------------------------ //
+extern std::string time_point_to_string(std::chrono::system_clock::time_point tp, const std::string& fmt = "%Y-%m-%d %H:%M:%S");
+
 // ------------------------ //
 // Functions use by server. //
 // ------------------------ //

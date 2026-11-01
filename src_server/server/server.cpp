@@ -2,6 +2,7 @@
 #include <cmath>
 #include <string>
 #include <iostream>
+#include <format>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/server.h>
 #include <grpcpp/server_builder.h>
@@ -24,8 +25,13 @@ class RouteServerService final : public route::Route::Service {
       const route::Point* point,
       route::Feature* feature
     ) override {
-      feature->set_name(get_feature_name(*point, _feature_list));
+      std::string feature_name = get_feature_name(*point, _feature_list);
+      feature->set_name(feature_name);
       feature->mutable_location()->CopyFrom(*point);
+
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "GetFeature: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
+
       return grpc::Status::OK;
     }
 
@@ -50,6 +56,9 @@ class RouteServerService final : public route::Route::Service {
           writer->Write(f);
         }
       }
+
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "ListFeatures: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
 
       return grpc::Status::OK;
     }
@@ -87,6 +96,9 @@ class RouteServerService final : public route::Route::Service {
       auto secs = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time);
       summary->set_elapsed_time(secs.count());
 
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "RecordRoute: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
+
       return grpc::Status::OK;
     }
 
@@ -110,6 +122,9 @@ class RouteServerService final : public route::Route::Service {
           _received_notes.push_back(note);
         }
       }
+
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "RouteChat: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
 
       return grpc::Status::OK;
     }

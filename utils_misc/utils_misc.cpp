@@ -63,3 +63,13 @@ route::RouteNote set_route_note(
   note.mutable_location()->CopyFrom(set_point(latitude, longitude));
   return note;
 }
+
+std::string time_point_to_string(
+  std::chrono::system_clock::time_point tp,
+  const std::string& fmt = "%Y-%m-%d %H:%M:%S"
+) {
+    auto t = std::chrono::system_clock::to_time_t(tp);
+    std::ostringstream os_string_stream;
+    os_string_stream << std::put_time(std::localtime(&t), fmt.c_str());
+    return os_string_stream.str();
+}
