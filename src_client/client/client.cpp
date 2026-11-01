@@ -1,7 +1,10 @@
+#include <chrono>
 #include <memory>
 #include <cmath>
+#include <random>
 #include <string>
 #include <iostream>
+#include <thread>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/server.h>
 #include <grpcpp/server_builder.h>
@@ -13,6 +16,7 @@
 #include "../../utils_protos/gen/route.grpc.pb.h"
 #include "../../utils_database/utils_database.hpp"
 #include "grpcpp/client_context.h"
+#include "grpcpp/support/sync_stream.h"
 
 route::Point MakePoint(long latitude, long longitude) {
   route::Point point;
@@ -65,6 +69,54 @@ class RouteClientService {
       }
     }
 
+    void RecordRoute() {
+      route::Point point;
+      route::RouteSummary stats;
+      grpc::ClientContext context;
+      const int kPoints = 10;
+      unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+      std::default_random_engine generator(seed);
+      std::uniform_int_distribution<int> feature_distribution(0, _feature_list.size() - 1);
+      std::uniform_int_distribution<int> delay_distribution(500, 1500);
+
+      std::unique_ptr<grpc::ClientWriter<route::Point>> writer(_stub->RecordRoute(&context, &stats));
+      for (int i = 0; i < kPoints; i++) {
+        const route::Feature& feature = _feature_list[feature_distribution(generator)];
+        std::cout << "Visiting point "
+                  << feature.location().latitude() / _kCoordinateFactor
+                  << ", "
+                  << feature.location().latitude() / _kCoordinateFactor
+                  << std::endl;
+
+        if (!writer->Write(feature.location())) {
+          break;
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(delay_distribution(generator)));
+      }
+
+      writer->WritesDone();
+      grpc::Status status = writer->Finish();
+      if (status.ok()) {
+        std::cout << "Finished trip with "
+                  << stats.point_count()
+                  << " points\n"
+                  << "Passed "
+                  << stats.feature_count()
+                  << " feature\n"
+                  << "Travelled "
+                  << stats.distance()
+                  << " meters\n"
+                  << "It took "
+                  << stats.elapsed_time()
+                  << " seconds"
+                  << std::endl;
+      } else {
+        std::cout << "RecordRoute rpc failed." << std::endl;
+      }
+    }
+
   private:
     bool GetOneFeature(
       const route::Point& point,
@@ -84,7 +136,11 @@ class RouteClientService {
       }
 
       if (feature->name().empty()) {
-        std::cout << "Found no feature at " << feature->location().latitude() / _kCoordinateFactor << ", " << feature->location().longitude() / _kCoordinateFactor << std::endl;
+        std::cout << "Found no feature at "
+                  << feature->location().latitude() / _kCoordinateFactor
+                  << ", "
+                  << feature->location().longitude() / _kCoordinateFactor
+                  << std::endl;
       }
 
       return true;
