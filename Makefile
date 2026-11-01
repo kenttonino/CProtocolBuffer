@@ -8,23 +8,22 @@ CPP_STD = -std=c++17
 # ---------------------------------------------------------------------------------------------- #
 HEADERS_GRPC_INCLUDE = -I/opt/grpc/include
 HEADERS_UTILS_PROTOS = -I${PATH_HOME}/utils_protos/gen
+HEADERS_UTILS_MISC = -I${PATH_HOME}/utils_misc
 HEADERS_UTILS_DATABASE = -I${PATH_HOME}/utils_database
-SOURCE_FILES = ${wildcard ./utils_database/*.cpp} ${wildcard ./utils_protos/gen/*.cc}
+SOURCE_FILES = ${wildcard ./utils_database/*.cpp} ${wildcard ./utils_protos/gen/*.cc} ${wildcard ./utils_misc/*.cpp}
 
 # ----------------------------------------- #
 # Server specific headers and source files. #
 # ----------------------------------------- #
-SERVER_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE} -I${PATH_HOME}/src_server/server
+SERVER_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE} ${HEADERS_UTILS_MISC} -I${PATH_HOME}/src_server/server
 SERVER_SOURCE_FILES = ${SOURCE_FILES} ${wildcard ./src_server/server/*.cpp}
 SERVER_CXXFLAGS += ${CPP_STD} ${HEADERS_GRPC_INCLUDE} ${SERVER_HEADERS_CgRPC} ${WARNING_FLAGS}
 
 # ----------------------------------------- #
 # CLient specific headers and source files. #
 # ----------------------------------------- #
-# CLIENT_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE} -I${PATH_HOME}/src_client/client
-CLIENT_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE}
-# CLIENT_SOURCE_FILES = ${SOURCE_FILES} ${wildcard ./src_client/client/*.cpp}
-CLIENT_SOURCE_FILES = ${SOURCE_FILES}
+CLIENT_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE} -I${PATH_HOME}/src_client/client
+CLIENT_SOURCE_FILES = ${SOURCE_FILES} ${wildcard ./src_client/client/*.cpp}
 CLIENT_CXXFLAGS += ${CPP_STD} ${HEADERS_GRPC_INCLUDE} ${CLIENT_HEADERS_CgRPC} ${WARNING_FLAGS}
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------- #

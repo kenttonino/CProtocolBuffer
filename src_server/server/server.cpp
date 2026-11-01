@@ -2,6 +2,7 @@
 #include <cmath>
 #include <string>
 #include <iostream>
+#include <format>
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/server.h>
 #include <grpcpp/server_builder.h>
@@ -11,44 +12,7 @@
 #include "../../utils_protos/gen/route.pb.h"
 #include "../../utils_protos/gen/route.grpc.pb.h"
 #include "../../utils_database/utils_database.hpp"
-
-float ConvertToRadians(float num) {
-  return num * 3.1415926 / 180;
-}
-
-// ------------------------------------------------------------------------ //
-// Formula is based on: http://mathforum.org/library/drmath/view/51879.html //
-// ------------------------------------------------------------------------ //
-float GetDistance(const route::Point& start, const route::Point& end) {
-  const float kCoordinateFactor = 10000000.0;
-  float lat_1 = start.latitude() / kCoordinateFactor;
-  float lat_2 = end.latitude() / kCoordinateFactor;
-  float lon_1 = start.longitude() / kCoordinateFactor;
-  float lon_2 = end.longitude() / kCoordinateFactor;
-  float lat_rad_1 = ConvertToRadians(lat_1);
-  float lat_rad_2 = ConvertToRadians(lat_2);
-  float delta_lat_rad = ConvertToRadians(lat_2 - lat_1);
-  float delta_lon_rad = ConvertToRadians(lon_2 - lon_1);
-
-  float a = pow(sin(delta_lat_rad / 2), 2) * cos(lat_rad_1) * cos(lat_rad_2) * pow(sin(delta_lon_rad / 2), 2);
-  float c = 2 * atan2(sqrt(a), sqrt(1 - a));
-  int R = 6371000;
-
-  return R * c;
-}
-
-std::string GetFeatureName(
-  const route::Point& point,
-  const std::vector<route::Feature>& feature_list
-) {
-  for (const route::Feature& f : feature_list) {
-    if (f.location().latitude() == point.latitude() && f.location().longitude() == point.longitude()) {
-      return f.name();
-    }
-  }
-
-  return "";
-}
+#include "../../utils_misc/utils_misc.hpp"
 
 class RouteServerService final : public route::Route::Service {
   public:
@@ -61,8 +25,13 @@ class RouteServerService final : public route::Route::Service {
       const route::Point* point,
       route::Feature* feature
     ) override {
-      feature->set_name(GetFeatureName(*point, _feature_list));
+      std::string feature_name = get_feature_name(*point, _feature_list);
+      feature->set_name(feature_name);
       feature->mutable_location()->CopyFrom(*point);
+
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "GetFeature: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
+
       return grpc::Status::OK;
     }
 
@@ -88,6 +57,9 @@ class RouteServerService final : public route::Route::Service {
         }
       }
 
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "ListFeatures: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
+
       return grpc::Status::OK;
     }
 
@@ -106,12 +78,12 @@ class RouteServerService final : public route::Route::Service {
       while (reader->Read(&point)) {
         point_count++;
 
-        if (!GetFeatureName(point, _feature_list).empty()) {
+        if (!get_feature_name(point, _feature_list).empty()) {
             feature_count++;
         }
 
         if (point_count != 1) {
-          distance += GetDistance(previous, point);
+          distance += get_distance(previous, point);
         }
 
         previous = point;
@@ -123,6 +95,9 @@ class RouteServerService final : public route::Route::Service {
       summary->set_distance(static_cast<long>(distance));
       auto secs = std::chrono::duration_cast<std::chrono::seconds>(end_time - start_time);
       summary->set_elapsed_time(secs.count());
+
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "RecordRoute: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
 
       return grpc::Status::OK;
     }
@@ -147,6 +122,9 @@ class RouteServerService final : public route::Route::Service {
           _received_notes.push_back(note);
         }
       }
+
+      const auto now = std::chrono::system_clock::now();
+      std::cout << BLUE << "RouteChat: " << RESET << GREEN << time_point_to_string(now) << RESET << std::endl;
 
       return grpc::Status::OK;
     }

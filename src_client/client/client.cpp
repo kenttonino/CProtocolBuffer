@@ -12,29 +12,12 @@
 #include <grpcpp/security/tls_certificate_provider.h>
 #include <grpc/grpc.h>
 #include <grpcpp/channel.h>
+#include "grpcpp/client_context.h"
+#include "grpcpp/support/sync_stream.h"
 #include "../../utils_protos/gen/route.pb.h"
 #include "../../utils_protos/gen/route.grpc.pb.h"
 #include "../../utils_database/utils_database.hpp"
-#include "grpcpp/client_context.h"
-#include "grpcpp/support/sync_stream.h"
-
-route::Point MakePoint(long latitude, long longitude) {
-  route::Point point;
-  point.set_latitude(latitude);
-  point.set_longitude(longitude);
-  return point;
-}
-
-route::RouteNote MakeRouteNote(
-  const std::string& message,
-  long latitude,
-  long longitude
-) {
-  route::RouteNote note;
-  note.set_message(message);
-  note.mutable_location()->CopyFrom(MakePoint(latitude, longitude));
-  return note;
-}
+#include "../../utils_misc/utils_misc.hpp"
 
 class RouteClientService {
   public:
@@ -45,16 +28,16 @@ class RouteClientService {
       utils_database::ParseDatabase(database, &_feature_list);
     }
 
-    void GetFeature() {
+    void get_feature() {
       route::Point point;
       route::Feature feature;
-      point = MakePoint(409146138, -746188906);
-      GetOneFeature(point, &feature);
-      point = MakePoint(0, 0);
-      GetOneFeature(point, &feature);
+      point = set_point(409146138, -746188906);
+      _get_one_feature(point, &feature);
+      point = set_point(0, 0);
+      _get_one_feature(point, &feature);
     }
 
-    void ListFeatures() {
+    void list_features() {
       route::Rectangle rectangle;
       route::Feature feature;
       grpc::ClientContext context;
@@ -68,8 +51,8 @@ class RouteClientService {
       std::unique_ptr<grpc::ClientReader<route::Feature>> reader(_stub->ListFeatures(&context, rectangle));
       while (reader->Read(&feature)) {
         std::cout << "Found feature called " << feature.name() << " at "
-                  << feature.location().latitude() / _kCoordinateFactor << ", "
-                  << feature.location().longitude() / _kCoordinateFactor << std::endl;
+                  << feature.location().latitude() / _k_coordinate_factor << ", "
+                  << feature.location().longitude() / _k_coordinate_factor << std::endl;
       }
 
       grpc::Status status = reader->Finish();
@@ -80,7 +63,7 @@ class RouteClientService {
       }
     }
 
-    void RecordRoute() {
+    void record_route() {
       route::Point point;
       route::RouteSummary stats;
       grpc::ClientContext context;
@@ -95,9 +78,9 @@ class RouteClientService {
       for (int i = 0; i < kPoints; i++) {
         const route::Feature& feature = _feature_list[feature_distribution(generator)];
         std::cout << "Visiting point "
-                  << feature.location().latitude() / _kCoordinateFactor
+                  << feature.location().latitude() / _k_coordinate_factor
                   << ", "
-                  << feature.location().latitude() / _kCoordinateFactor
+                  << feature.location().longitude() / _k_coordinate_factor
                   << std::endl;
 
         if (!writer->Write(feature.location())) {
@@ -128,16 +111,16 @@ class RouteClientService {
       }
     }
 
-    void RouteChat() {
+    void route_chat() {
       grpc::ClientContext context;
       std::shared_ptr<grpc::ClientReaderWriter<route::RouteNote, route::RouteNote>> stream(_stub->RouteChat(&context));
 
       std::thread writer([stream]() {
         std::vector<route::RouteNote> notes{
-          MakeRouteNote("First message", 0, 0),
-          MakeRouteNote("Second message", 0, 1),
-          MakeRouteNote("Thid message", 1, 0),
-          MakeRouteNote("Fourth message", 0, 0)
+          set_route_note("First message", 0, 0),
+          set_route_note("Second message", 0, 1),
+          set_route_note("Thid message", 1, 0),
+          set_route_note("Fourth message", 0, 0)
         };
 
         for (const route::RouteNote& note : notes) {
@@ -173,7 +156,7 @@ class RouteClientService {
     }
 
   private:
-    bool GetOneFeature(
+    bool _get_one_feature(
       const route::Point& point,
       route::Feature* feature
     ) {
@@ -192,16 +175,47 @@ class RouteClientService {
 
       if (feature->name().empty()) {
         std::cout << "Found no feature at "
-                  << feature->location().latitude() / _kCoordinateFactor
+                  << feature->location().latitude() / _k_coordinate_factor
                   << ", "
-                  << feature->location().longitude() / _kCoordinateFactor
+                  << feature->location().longitude() / _k_coordinate_factor
                   << std::endl;
       }
 
       return true;
     }
 
-    const float _kCoordinateFactor = 10000000.0;
+    const float _k_coordinate_factor = 10000000.0;
     std::unique_ptr<route::Route::Stub> _stub;
     std::vector<route::Feature> _feature_list;
 };
+
+void run_client(std::string database) {
+  RouteClientService client_service(
+    grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()),
+    database
+  );
+
+  std::cout << BLUE << "# ---------- #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "GetFeature" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# ---------- #" << RESET << std::endl;
+  client_service.get_feature();
+  std::cout << std::endl;
+
+  std::cout << BLUE << "# ------------ #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "ListFeatures" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# ------------ #" << RESET << std::endl;
+  client_service.list_features();
+  std::cout << std::endl;
+
+  std::cout << BLUE << "# ----------- #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "RecordRoute" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# ----------- #" << RESET << std::endl;
+  client_service.record_route();
+  std::cout << std::endl;
+
+  std::cout << BLUE << "# --------- #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "RouteChat" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# --------- #" << RESET << std::endl;
+  client_service.route_chat();
+  std::cout << std::endl;
+}
