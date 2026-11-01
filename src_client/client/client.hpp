@@ -26,7 +26,10 @@ class RouteClientService {
     void RouteChat() {};
 
   private:
+    bool GetOneFeature(const route::Point& point, route::Feature* feature);
+    const float _kCoordinateFactor = 10000000.0f;
     std::unique_ptr<route::Route::Stub> _stub;
+    std::vector<route::Feature> _feature_list;
 };
 
 #endif

@@ -2,7 +2,7 @@
 #include <iostream>
 #include "absl/log/initialize.h"
 #include "../utils_database/utils_database.hpp"
-#include "./client/client.hpp"
+#include "./client/client.cpp"
 #include "grpcpp/create_channel.h"
 #include "grpcpp/security/credentials.h"
 

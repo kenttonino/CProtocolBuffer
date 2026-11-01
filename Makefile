@@ -21,8 +21,10 @@ SERVER_CXXFLAGS += ${CPP_STD} ${HEADERS_GRPC_INCLUDE} ${SERVER_HEADERS_CgRPC} ${
 # ----------------------------------------- #
 # CLient specific headers and source files. #
 # ----------------------------------------- #
-CLIENT_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE} -I${PATH_HOME}/src_client/client
-CLIENT_SOURCE_FILES = ${SOURCE_FILES} ${wildcard ./src_client/client/*.cpp}
+# CLIENT_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE} -I${PATH_HOME}/src_client/client
+CLIENT_HEADERS_CgRPC = ${HEADERS_UTILS_PROTOS} ${HEADERS_UTILS_DATABASE}
+# CLIENT_SOURCE_FILES = ${SOURCE_FILES} ${wildcard ./src_client/client/*.cpp}
+CLIENT_SOURCE_FILES = ${SOURCE_FILES}
 CLIENT_CXXFLAGS += ${CPP_STD} ${HEADERS_GRPC_INCLUDE} ${CLIENT_HEADERS_CgRPC} ${WARNING_FLAGS}
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------- #
