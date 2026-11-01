@@ -1,4 +1,3 @@
-#include <chrono>
 #include <cmath>
 #include <string>
 #include <grpcpp/grpcpp.h>
@@ -45,4 +44,22 @@ std::string get_feature_name(
   }
 
   return "";
+}
+
+route::Point set_point(long latitude, long longitude) {
+  route::Point point;
+  point.set_latitude(latitude);
+  point.set_longitude(longitude);
+  return point;
+}
+
+route::RouteNote set_route_note(
+  const std::string& message,
+  long latitude,
+  long longitude
+) {
+  route::RouteNote note;
+  note.set_message(message);
+  note.mutable_location()->CopyFrom(set_point(latitude, longitude));
+  return note;
 }

@@ -12,30 +12,12 @@
 #include <grpcpp/security/tls_certificate_provider.h>
 #include <grpc/grpc.h>
 #include <grpcpp/channel.h>
+#include "grpcpp/client_context.h"
+#include "grpcpp/support/sync_stream.h"
 #include "../../utils_protos/gen/route.pb.h"
 #include "../../utils_protos/gen/route.grpc.pb.h"
 #include "../../utils_database/utils_database.hpp"
 #include "../../utils_misc/utils_misc.hpp"
-#include "grpcpp/client_context.h"
-#include "grpcpp/support/sync_stream.h"
-
-route::Point _set_point(long latitude, long longitude) {
-  route::Point point;
-  point.set_latitude(latitude);
-  point.set_longitude(longitude);
-  return point;
-}
-
-route::RouteNote _set_route_note(
-  const std::string& message,
-  long latitude,
-  long longitude
-) {
-  route::RouteNote note;
-  note.set_message(message);
-  note.mutable_location()->CopyFrom(_set_point(latitude, longitude));
-  return note;
-}
 
 class RouteClientService {
   public:
@@ -49,9 +31,9 @@ class RouteClientService {
     void get_feature() {
       route::Point point;
       route::Feature feature;
-      point = _set_point(409146138, -746188906);
+      point = set_point(409146138, -746188906);
       _get_one_feature(point, &feature);
-      point = _set_point(0, 0);
+      point = set_point(0, 0);
       _get_one_feature(point, &feature);
     }
 
@@ -135,10 +117,10 @@ class RouteClientService {
 
       std::thread writer([stream]() {
         std::vector<route::RouteNote> notes{
-          _set_route_note("First message", 0, 0),
-          _set_route_note("Second message", 0, 1),
-          _set_route_note("Thid message", 1, 0),
-          _set_route_note("Fourth message", 0, 0)
+          set_route_note("First message", 0, 0),
+          set_route_note("Second message", 0, 1),
+          set_route_note("Thid message", 1, 0),
+          set_route_note("Fourth message", 0, 0)
         };
 
         for (const route::RouteNote& note : notes) {
