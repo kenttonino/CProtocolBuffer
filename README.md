@@ -2,7 +2,7 @@
 
 > - Learning gRPC & Protobuf using C/C++.
 > - I based the implementation on the official gRPC C++ documentation and route guide examples.
-> - I added some little improvements just to make it work on my machine (Debian Linux) without using CMake, Bazel, and other C++ crazy and overly complicated tools. 
+> - I added some little improvements just to make it work on my machine (Debian Linux) without using CMake (installation only), Bazel, and other C++ crazy and overly complicated tools. 
 
 <br />
 <br />
