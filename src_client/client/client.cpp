@@ -15,6 +15,7 @@
 #include "../../utils_protos/gen/route.pb.h"
 #include "../../utils_protos/gen/route.grpc.pb.h"
 #include "../../utils_database/utils_database.hpp"
+#include "../../utils_misc/utils_misc.hpp"
 #include "grpcpp/client_context.h"
 #include "grpcpp/support/sync_stream.h"
 
@@ -212,27 +213,27 @@ void run_client(std::string database) {
     database
   );
 
-  std::cout << "# ---------- #";
-  std::cout << "# GetFeature #" << std::endl;
-  std::cout << "# ---------- #";
+  std::cout << BLUE << "# ---------- #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "GetFeature" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# ---------- #" << RESET << std::endl;
   client_service.GetFeature();
   std::cout << std::endl;
 
-  std::cout << "# ------------ #";
-  std::cout << "# ListFeatures #" << std::endl;
-  std::cout << "# ------------ #";
+  std::cout << BLUE << "# ------------ #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "ListFeatures" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# ------------ #" << RESET << std::endl;
   client_service.ListFeatures();
   std::cout << std::endl;
 
-  std::cout << "# ----------- #" << std::endl;
-  std::cout << "# RecordRoute #" << std::endl;
-  std::cout << "# ----------- #" << std::endl;
+  std::cout << BLUE << "# ----------- #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "RecordRoute" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# ----------- #" << RESET << std::endl;
   client_service.RecordRoute();
   std::cout << std::endl;
 
-  std::cout << "# --------- #" << std::endl;
-  std::cout << "# RouteChat #" << std::endl;
-  std::cout << "# --------- #" << std::endl;
+  std::cout << BLUE << "# --------- #" << RESET << std::endl;
+  std::cout << BLUE << "# " << RESET << GREEN << "RouteChat" << RESET << BLUE " #" << RESET << std::endl;
+  std::cout << BLUE << "# --------- #" << RESET << std::endl;
   client_service.RouteChat();
   std::cout << std::endl;
 }
