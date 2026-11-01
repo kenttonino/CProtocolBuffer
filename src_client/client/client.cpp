@@ -46,7 +46,7 @@ class RouteClientService {
       utils_database::ParseDatabase(database, &_feature_list);
     }
 
-    void GetFeature() {
+    void get_feature() {
       route::Point point;
       route::Feature feature;
       point = _set_point(409146138, -746188906);
@@ -55,7 +55,7 @@ class RouteClientService {
       GetOneFeature(point, &feature);
     }
 
-    void ListFeatures() {
+    void list_features() {
       route::Rectangle rectangle;
       route::Feature feature;
       grpc::ClientContext context;
@@ -81,7 +81,7 @@ class RouteClientService {
       }
     }
 
-    void RecordRoute() {
+    void record_route() {
       route::Point point;
       route::RouteSummary stats;
       grpc::ClientContext context;
@@ -129,7 +129,7 @@ class RouteClientService {
       }
     }
 
-    void RouteChat() {
+    void route_chat() {
       grpc::ClientContext context;
       std::shared_ptr<grpc::ClientReaderWriter<route::RouteNote, route::RouteNote>> stream(_stub->RouteChat(&context));
 
@@ -216,24 +216,24 @@ void run_client(std::string database) {
   std::cout << BLUE << "# ---------- #" << RESET << std::endl;
   std::cout << BLUE << "# " << RESET << GREEN << "GetFeature" << RESET << BLUE " #" << RESET << std::endl;
   std::cout << BLUE << "# ---------- #" << RESET << std::endl;
-  client_service.GetFeature();
+  client_service.get_feature();
   std::cout << std::endl;
 
   std::cout << BLUE << "# ------------ #" << RESET << std::endl;
   std::cout << BLUE << "# " << RESET << GREEN << "ListFeatures" << RESET << BLUE " #" << RESET << std::endl;
   std::cout << BLUE << "# ------------ #" << RESET << std::endl;
-  client_service.ListFeatures();
+  client_service.list_features();
   std::cout << std::endl;
 
   std::cout << BLUE << "# ----------- #" << RESET << std::endl;
   std::cout << BLUE << "# " << RESET << GREEN << "RecordRoute" << RESET << BLUE " #" << RESET << std::endl;
   std::cout << BLUE << "# ----------- #" << RESET << std::endl;
-  client_service.RecordRoute();
+  client_service.record_route();
   std::cout << std::endl;
 
   std::cout << BLUE << "# --------- #" << RESET << std::endl;
   std::cout << BLUE << "# " << RESET << GREEN << "RouteChat" << RESET << BLUE " #" << RESET << std::endl;
   std::cout << BLUE << "# --------- #" << RESET << std::endl;
-  client_service.RouteChat();
+  client_service.route_chat();
   std::cout << std::endl;
 }
