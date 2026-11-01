@@ -12,23 +12,23 @@
 #include "../../utils_protos/gen/route.grpc.pb.h"
 #include "../../utils_database/utils_database.hpp"
 
-float ConvertToRadians(float num) {
+float _convert_to_radians(float num) {
   return num * 3.1415926 / 180;
 }
 
 // ------------------------------------------------------------------------ //
 // Formula is based on: http://mathforum.org/library/drmath/view/51879.html //
 // ------------------------------------------------------------------------ //
-float GetDistance(const route::Point& start, const route::Point& end) {
+float _get_distance(const route::Point& start, const route::Point& end) {
   const float kCoordinateFactor = 10000000.0;
   float lat_1 = start.latitude() / kCoordinateFactor;
   float lat_2 = end.latitude() / kCoordinateFactor;
   float lon_1 = start.longitude() / kCoordinateFactor;
   float lon_2 = end.longitude() / kCoordinateFactor;
-  float lat_rad_1 = ConvertToRadians(lat_1);
-  float lat_rad_2 = ConvertToRadians(lat_2);
-  float delta_lat_rad = ConvertToRadians(lat_2 - lat_1);
-  float delta_lon_rad = ConvertToRadians(lon_2 - lon_1);
+  float lat_rad_1 = _convert_to_radians(lat_1);
+  float lat_rad_2 = _convert_to_radians(lat_2);
+  float delta_lat_rad = _convert_to_radians(lat_2 - lat_1);
+  float delta_lon_rad = _convert_to_radians(lon_2 - lon_1);
 
   float a = pow(sin(delta_lat_rad / 2), 2) * cos(lat_rad_1) * cos(lat_rad_2) * pow(sin(delta_lon_rad / 2), 2);
   float c = 2 * atan2(sqrt(a), sqrt(1 - a));
@@ -111,7 +111,7 @@ class RouteServerService final : public route::Route::Service {
         }
 
         if (point_count != 1) {
-          distance += GetDistance(previous, point);
+          distance += _get_distance(previous, point);
         }
 
         previous = point;
