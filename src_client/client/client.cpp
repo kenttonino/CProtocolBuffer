@@ -50,9 +50,9 @@ class RouteClientService {
       route::Point point;
       route::Feature feature;
       point = _set_point(409146138, -746188906);
-      GetOneFeature(point, &feature);
+      _get_one_feature(point, &feature);
       point = _set_point(0, 0);
-      GetOneFeature(point, &feature);
+      _get_one_feature(point, &feature);
     }
 
     void list_features() {
@@ -69,8 +69,8 @@ class RouteClientService {
       std::unique_ptr<grpc::ClientReader<route::Feature>> reader(_stub->ListFeatures(&context, rectangle));
       while (reader->Read(&feature)) {
         std::cout << "Found feature called " << feature.name() << " at "
-                  << feature.location().latitude() / _kCoordinateFactor << ", "
-                  << feature.location().longitude() / _kCoordinateFactor << std::endl;
+                  << feature.location().latitude() / _k_coordinate_factor << ", "
+                  << feature.location().longitude() / _k_coordinate_factor << std::endl;
       }
 
       grpc::Status status = reader->Finish();
@@ -96,9 +96,9 @@ class RouteClientService {
       for (int i = 0; i < kPoints; i++) {
         const route::Feature& feature = _feature_list[feature_distribution(generator)];
         std::cout << "Visiting point "
-                  << feature.location().latitude() / _kCoordinateFactor
+                  << feature.location().latitude() / _k_coordinate_factor
                   << ", "
-                  << feature.location().longitude() / _kCoordinateFactor
+                  << feature.location().longitude() / _k_coordinate_factor
                   << std::endl;
 
         if (!writer->Write(feature.location())) {
@@ -174,7 +174,7 @@ class RouteClientService {
     }
 
   private:
-    bool GetOneFeature(
+    bool _get_one_feature(
       const route::Point& point,
       route::Feature* feature
     ) {
@@ -193,16 +193,16 @@ class RouteClientService {
 
       if (feature->name().empty()) {
         std::cout << "Found no feature at "
-                  << feature->location().latitude() / _kCoordinateFactor
+                  << feature->location().latitude() / _k_coordinate_factor
                   << ", "
-                  << feature->location().longitude() / _kCoordinateFactor
+                  << feature->location().longitude() / _k_coordinate_factor
                   << std::endl;
       }
 
       return true;
     }
 
-    const float _kCoordinateFactor = 10000000.0;
+    const float _k_coordinate_factor = 10000000.0;
     std::unique_ptr<route::Route::Stub> _stub;
     std::vector<route::Feature> _feature_list;
 };
