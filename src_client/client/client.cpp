@@ -97,7 +97,7 @@ class RouteClientService {
         std::cout << "Visiting point "
                   << feature.location().latitude() / _kCoordinateFactor
                   << ", "
-                  << feature.location().latitude() / _kCoordinateFactor
+                  << feature.location().longitude() / _kCoordinateFactor
                   << std::endl;
 
         if (!writer->Write(feature.location())) {
@@ -205,3 +205,34 @@ class RouteClientService {
     std::unique_ptr<route::Route::Stub> _stub;
     std::vector<route::Feature> _feature_list;
 };
+
+void run_client(std::string database) {
+  RouteClientService client_service(
+    grpc::CreateChannel("localhost:50051", grpc::InsecureChannelCredentials()),
+    database
+  );
+
+  std::cout << "# ---------- #";
+  std::cout << "# GetFeature #" << std::endl;
+  std::cout << "# ---------- #";
+  client_service.GetFeature();
+  std::cout << std::endl;
+
+  std::cout << "# ------------ #";
+  std::cout << "# ListFeatures #" << std::endl;
+  std::cout << "# ------------ #";
+  client_service.ListFeatures();
+  std::cout << std::endl;
+
+  std::cout << "# ----------- #" << std::endl;
+  std::cout << "# RecordRoute #" << std::endl;
+  std::cout << "# ----------- #" << std::endl;
+  client_service.RecordRoute();
+  std::cout << std::endl;
+
+  std::cout << "# --------- #" << std::endl;
+  std::cout << "# RouteChat #" << std::endl;
+  std::cout << "# --------- #" << std::endl;
+  client_service.RouteChat();
+  std::cout << std::endl;
+}
