@@ -20,15 +20,14 @@
 // ------------------------ //
 // Functions use by server. //
 // ------------------------ //
-float convert_to_radians(float num);
-float get_distance(const route::Point& start, const route::Point& end);
-std::string get_feature_name(const route::Point& point, const std::vector<route::Feature>& feature_list);
+extern float convert_to_radians(float num);
+extern float get_distance(const route::Point& start, const route::Point& end);
+extern std::string get_feature_name(const route::Point& point, const std::vector<route::Feature>& feature_list);
 
 // ------------------------ //
 // Functions use by client. //
 // ------------------------ //
-route::Point set_point(long latitude, long longitude);
-route::RouteNote set_route_note(const std::string& message, long latitude, long longitude);
-
+extern route::Point set_point(long latitude, long longitude);
+extern route::RouteNote set_route_note(const std::string& message, long latitude, long longitude);
 
 #endif
