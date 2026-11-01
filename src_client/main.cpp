@@ -1,7 +1,6 @@
 #include "absl/flags/parse.h"
 #include "absl/log/initialize.h"
 #include "../utils_database/utils_database.hpp"
-#include "./client/client.cpp"
 #include "./client/client.hpp"
 
 int main(int argc, char** argv) {
