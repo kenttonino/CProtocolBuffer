@@ -48,7 +48,7 @@ namespace utils_database {
           return SetFailedAndReturnFalse();
         }
 
-        if (!Match(_location) || !Match("(") || !Match(_latitude)) {
+        if (!Match(_location) || !Match("{") || !Match(_latitude)) {
           return SetFailedAndReturnFalse();
         }
 

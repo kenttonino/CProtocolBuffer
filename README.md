@@ -48,6 +48,9 @@ make build
 
 # Run the route server and pass the database relative path.
 make run-server
+
+# Then, run the client separately.
+make run-client
 ```
 
 <br />
@@ -56,6 +59,7 @@ make run-server
 
 ## Learning References
 
+> - https://github.com/grpc/grpc/blob/v1.85.0/examples/cpp/route_guide/route_guide_db.json
 > - https://grpc.io/docs/languages/cpp/quickstart/
 > - https://github.com/grpc/grpc/blob/master/BUILDING.md#build-from-source
 > - https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html
