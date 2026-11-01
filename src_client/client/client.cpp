@@ -19,7 +19,7 @@
 #include "grpcpp/client_context.h"
 #include "grpcpp/support/sync_stream.h"
 
-route::Point MakePoint(long latitude, long longitude) {
+route::Point _set_point(long latitude, long longitude) {
   route::Point point;
   point.set_latitude(latitude);
   point.set_longitude(longitude);
@@ -33,7 +33,7 @@ route::RouteNote MakeRouteNote(
 ) {
   route::RouteNote note;
   note.set_message(message);
-  note.mutable_location()->CopyFrom(MakePoint(latitude, longitude));
+  note.mutable_location()->CopyFrom(_set_point(latitude, longitude));
   return note;
 }
 
@@ -49,9 +49,9 @@ class RouteClientService {
     void GetFeature() {
       route::Point point;
       route::Feature feature;
-      point = MakePoint(409146138, -746188906);
+      point = _set_point(409146138, -746188906);
       GetOneFeature(point, &feature);
-      point = MakePoint(0, 0);
+      point = _set_point(0, 0);
       GetOneFeature(point, &feature);
     }
 
