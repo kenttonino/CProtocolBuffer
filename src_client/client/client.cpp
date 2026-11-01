@@ -25,6 +25,17 @@ route::Point MakePoint(long latitude, long longitude) {
   return point;
 }
 
+route::RouteNote MakeRouteNote(
+  const std::string& message,
+  long latitude,
+  long longitude
+) {
+  route::RouteNote note;
+  note.set_message(message);
+  note.mutable_location()->CopyFrom(MakePoint(latitude, longitude));
+  return note;
+}
+
 class RouteClientService {
   public:
     RouteClientService(
@@ -114,6 +125,50 @@ class RouteClientService {
                   << std::endl;
       } else {
         std::cout << "RecordRoute rpc failed." << std::endl;
+      }
+    }
+
+    void RouteChat() {
+      grpc::ClientContext context;
+      std::shared_ptr<grpc::ClientReaderWriter<route::RouteNote, route::RouteNote>> stream(_stub->RouteChat(&context));
+
+      std::thread writer([stream]() {
+        std::vector<route::RouteNote> notes{
+          MakeRouteNote("First message", 0, 0),
+          MakeRouteNote("Second message", 0, 1),
+          MakeRouteNote("Thid message", 1, 0),
+          MakeRouteNote("Fourth message", 0, 0)
+        };
+
+        for (const route::RouteNote& note : notes) {
+          std::cout << "Sending message "
+                    << note.message()
+                    << " at "
+                    << note.location().latitude()
+                    << ","
+                    << note.location().longitude()
+                    << std::endl;
+          stream->Write(note);
+        }
+
+        stream->WritesDone();
+      });
+
+      route::RouteNote server_note;
+      while (stream->Read(&server_note)) {
+        std::cout << "Got message "
+                  << server_note.message()
+                  << " at "
+                  << server_note.location().latitude()
+                  << ", "
+                  << server_note.location().longitude()
+                  << std::endl;
+      }
+
+      writer.join();
+      grpc::Status status = stream->Finish();
+      if (!status.ok()) {
+        std::cout << "RouteChat RPC failed." << std::endl;
       }
     }
 
