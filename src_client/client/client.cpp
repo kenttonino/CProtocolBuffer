@@ -26,7 +26,7 @@ route::Point _set_point(long latitude, long longitude) {
   return point;
 }
 
-route::RouteNote MakeRouteNote(
+route::RouteNote _set_route_note(
   const std::string& message,
   long latitude,
   long longitude
@@ -135,10 +135,10 @@ class RouteClientService {
 
       std::thread writer([stream]() {
         std::vector<route::RouteNote> notes{
-          MakeRouteNote("First message", 0, 0),
-          MakeRouteNote("Second message", 0, 1),
-          MakeRouteNote("Thid message", 1, 0),
-          MakeRouteNote("Fourth message", 0, 0)
+          _set_route_note("First message", 0, 0),
+          _set_route_note("Second message", 0, 1),
+          _set_route_note("Thid message", 1, 0),
+          _set_route_note("Fourth message", 0, 0)
         };
 
         for (const route::RouteNote& note : notes) {
